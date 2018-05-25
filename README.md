@@ -27,21 +27,42 @@ oas.validate((err, spec) => {
 });
 ```
 
+# Errors
+
+For validation errors, when available, you'll get back an object:
+
+```
+{
+  "errors": [
+    {
+      "message": "User-friendly message",
+      "path": [...array of the path to the error...]
+    }
+  ],
+  "full": ...raw errors...
+}
+```
+
+`message` is almost always there, but `path` is less dependable.
+
 # Helper functions
 
 If you want some more functionality, you can do anything here:
 
-| Function       | What it does                                                   |   |   |   |
-|----------------|----------------------------------------------------------------|---|---|---|
-| oas.load(cb)      | Just load the file, valid or not, as JSON                      |   |   |   |
-| oas.bundle(cb)    | Bring together all files into one JSON blob (but keep `$refs`) |   |   |   |
-| oas.deref(cb)     | Resolve `$refs`                                                |   |   |   |
-| oas.validate(cb, [convertToLatest?]))  | Validate the whole thing!                |   |   |   |
+| Function       | What it does                                                   |
+|----------------|----------------------------------------------------------------|
+| oas.load(cb)      | Just load the file, valid or not, as JSON                      |
+| oas.bundle(cb)    | Bring together all files into one JSON blob (but keep `$refs`) |
+| oas.deref(cb)     | Resolve `$refs`                                                |
+| oas.validate(cb, [convertToLatest?]))  | Validate the whole thing!                |
 
-# Always return OAS 3
+# Other little features
 
-If you want `.validate` to always return a OAS 3 document, include a `true` as the second param:
+### Always return OAS 3
 
-```javascript
-oas.validate(action, true);
-```
+If you want `.validate` to always return a OAS 3 document, include a `true` as the second param: `oas.validate(action, true);`
+
+### Enable local paths
+
+For security reasons, you need to enable it. Use `new OAS('./whatever.json', { enablePaths: true })` to load local files.
+
