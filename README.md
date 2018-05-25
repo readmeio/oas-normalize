@@ -2,12 +2,19 @@ Swagger 2 or OAS 3? YAML or JSON? URL, path, string or object? Who cares! It jus
 
 This module uses a bunch of other great modules to do the heavy lifting, and normalizes everything!
 
+[![](https://cl.ly/1h271F1M1e2T/Untitled-2.png)](http://readme.io)
+
+# Install
+
+```bash
+npm install oas-normalize --save
+```
+
 # Usage
 
 It's pretty simple:
 
 ```javascript
-
 const OAS = require('oas-normalize');
 
 const oas = new OAS('http://google.com'); // Or a string, pathname, JSON blob, whatever
