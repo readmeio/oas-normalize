@@ -17,7 +17,7 @@ It's pretty simple:
 ```javascript
 const OAS = require('oas-normalize');
 
-const oas = new OAS('http://google.com'); // Or a string, pathname, JSON blob, whatever
+const oas = new OAS('https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml'); // Or a string, pathname, JSON blob, whatever
 oas.validate((err, spec) => {
   if (err) {
     console.log(err.errors);
