@@ -1,6 +1,6 @@
 {
   "name": "oas-normalize",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Swagger 2 or OAS 3? YAML or JSON? URL, path, string or object? Who cares! It just works.",
   "main": "oas.js",
   "scripts": {
