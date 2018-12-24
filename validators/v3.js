@@ -1,7 +1,3 @@
-/*
-const validator = require('speccy/lib/validator');
-*/
-
 const validator = require('swagger2openapi/validate.js');
 
 module.exports = (el, cb) => {
