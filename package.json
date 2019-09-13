@@ -3,11 +3,17 @@
   "version": "0.0.3",
   "description": "Swagger 2 or OAS 3? YAML or JSON? URL, path, string or object? Who cares! It just works.",
   "main": "oas.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/readmeio/oas-normalize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/readmeio/oas-normalize/issues"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "deep-extend": "^0.6.0",
     "json-schema-ref-parser": "^5.0.3",
