@@ -8,6 +8,7 @@ describe('#validate', () => {
       o.validate((err, definition) => {
         expect(definition.openapi).toBe('3.0.0');
         expect(Object.keys(definition.paths).length).toBe(14);
+        expect(definition.paths['/pet'].post.operationId).toBe('addPet');
         expect(Object.keys(definition.components.requestBodies).length).toBe(2);
         expect(Object.keys(definition.components.securitySchemes).length).toBe(2);
         expect(Object.keys(definition.components.schemas).length).toBe(6);
@@ -22,6 +23,7 @@ describe('#validate', () => {
       o.validate((err, definition) => {
         expect(definition.openapi).toBe('3.0.0');
         expect(Object.keys(definition.paths).length).toBe(14);
+        expect(definition.paths['/pet'].post.operationId).toBe('addPet');
         expect(Object.keys(definition.components.requestBodies).length).toBe(2);
         expect(Object.keys(definition.components.securitySchemes).length).toBe(2);
         expect(Object.keys(definition.components.schemas).length).toBe(6);
@@ -31,10 +33,11 @@ describe('#validate', () => {
   });
 
   describe('OpenAPI', () => {
-    it('shoudl validate a URL hosting YAML as expected', done => {
+    it('should validate a URL hosting YAML as expected', done => {
       const o = new OAS('https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml');
       o.validate((err, definition) => {
         expect(definition.openapi).toBe('3.0.0');
+        expect(definition.paths['/pets'].post.operationId).toBe('addPet');
         expect(Object.keys(definition.paths).length).toBe(2);
         expect(Object.keys(definition.components.schemas).length).toBe(3);
         done();
@@ -47,6 +50,7 @@ describe('#validate', () => {
 
       o.validate((err, definition) => {
         expect(definition.openapi).toBe('3.0.0');
+        expect(definition.paths['/pets'].post.operationId).toBe('addPet');
         expect(Object.keys(definition.paths).length).toBe(2);
         expect(Object.keys(definition.components.schemas).length).toBe(3);
         done();
