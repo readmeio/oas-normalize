@@ -1,21 +1,12 @@
-/* TODO:
- * - documentation
- *   - errors
- *   - functions
- *   - credits
- * - promise support
- * - convert from v2 -> v3
- */
-
 const r2 = require('r2')
 const fs = require('fs');
-const YAML = require('yamljs');
 const $RefParser = require('json-schema-ref-parser');
 const deepClone = require('deep-extend');
 const converter = require('swagger2openapi');
 
 const v2 = require('./validators/v2.js');
 const v3 = require('./validators/v3.js');
+const utils = require('./lib/utils');
 
 class OAS {
   constructor(file, opts) {
@@ -129,44 +120,5 @@ class OAS {
     });
   }
 }
-
-const utils = {
-  // YAML or JSON string to JSON Object
-  stringToJSON : (string) => {
-    if (typeof string === 'object') {
-      return deepClone({}, string);
-    } else if (string.match(/^\s*{/)) {
-      return JSON.parse(string);
-    } else {
-      return YAML.parse(string);
-    }
-  },
-
-  type : (obj) => {
-    if (utils.isBuffer(obj)) {
-      return 'buffer';
-    } if (typeof obj === 'object') {
-      return 'json';
-    } else if (typeof obj === 'string') {
-      if (obj.match(/\s*{/)) {
-        return 'string-json';
-      }
-      if (obj.match(/\n/)) { // Not sure about this...
-        return 'string-yaml';
-      }
-      if (obj.substr(0, 4) === 'http') {
-        return 'url';
-      }
-      return 'path';
-    }
-    return false;
-  },
-
-  version: schema => schema.swagger || schema.openapi,
-
-  isBuffer: obj => obj != null && obj.constructor != null &&
-    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj),
-
-};
 
 module.exports = OAS;
