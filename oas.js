@@ -128,7 +128,6 @@ class OAS {
       return cb(null, utils.version(schema));
     });
   }
-
 }
 
 const utils = {
