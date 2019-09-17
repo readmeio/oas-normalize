@@ -12,7 +12,6 @@
   },
   "scripts": {
     "lint": "eslint -f unix .",
-    "prettier": "prettier --write \"./**/**.js\"",
     "test": "jest --coverage"
   },
   "license": "MIT",
@@ -27,7 +26,6 @@
   "devDependencies": {
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "jest": "^24.9.0"
   }

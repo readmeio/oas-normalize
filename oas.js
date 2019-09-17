@@ -1,4 +1,4 @@
-const r2 = require('r2')
+const r2 = require('r2');
 const fs = require('fs');
 const $RefParser = require('json-schema-ref-parser');
 const deepClone = require('deep-extend');
@@ -28,28 +28,28 @@ class OAS {
     if (this.out.load) return cb(null, this.out.load);
 
     const success = (obj) => {
-      obj = utils.stringToJSON(obj);
-      this.f_load = obj;
-      cb(null, obj);
+      const ret = utils.stringToJSON(obj);
+      this.f_load = ret;
+      cb(null, ret);
     };
 
     if (this.type === 'json' || this.type === 'string-json' || this.type === 'string-yaml') {
       return success(this.file);
-    } else if(this.type === 'buffer') {
+    } else if (this.type === 'buffer') {
       return success(this.file.toString());
     } else if (this.type === 'url') {
-      let resp = await r2.get(this.file).text;
+      const resp = await r2.get(this.file).text;
       return success(resp);
     } else if (this.type === 'path') {
       // Load a local file
       if (!this.opts.enablePaths) {
-        return cb(new Error("Use opts.enablePaths to enable accessing local files"));
+        return cb(new Error('Use opts.enablePaths to enable accessing local files'));
       }
 
       const contents = fs.readFileSync(this.file).toString();
       return success(contents);
     } else {
-      cb(new Error("Could not load this file"));
+      cb(new Error('Could not load this file'));
     }
   }
 
@@ -58,8 +58,8 @@ class OAS {
 
     this.load((err, schema) => {
       if (err) return cb(err);
-      $RefParser.bundle(schema, (err, _schema) => {
-        if (err) return cb(err);
+      $RefParser.bundle(schema, (err2, _schema) => {
+        if (err2) return cb(err2);
         this.out.bundle = _schema;
         cb(null, _schema);
       });
@@ -71,8 +71,8 @@ class OAS {
 
     this.load((err, schema) => {
       if (err) return cb(err);
-      $RefParser.dereference(schema, (err, _schema) => {
-        if (err) return cb(err);
+      $RefParser.dereference(schema, (err2, _schema) => {
+        if (err2) return cb(err2);
         this.out.deref = _schema;
         cb(null, _schema);
       });
@@ -83,19 +83,19 @@ class OAS {
     this.deref((err, schema) => {
       if (err) return cb(err);
 
-      const baseVersion = parseInt(utils.version(schema));
+      const baseVersion = parseInt(utils.version(schema), 10);
 
-      const done = (err, out) => {
-        if (err) return cb(err);
+      const done = (err2, out) => {
+        if (err2) return cb(err2);
 
         if (out && convertToLatest) {
-          return converter.convertObj(out, {}, (err, options) => {
+          return converter.convertObj(out, {}, (err3, options) => {
             cb(null, options.openapi);
           });
         } else {
           cb(null, out);
         }
-      }
+      };
 
       if (baseVersion === 1) {
         return cb(new Error("Doesn't currently support Swagger v1.2"));

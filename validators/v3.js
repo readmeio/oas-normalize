@@ -5,8 +5,10 @@ module.exports = (el, cb) => {
     if (!out.valid) {
       return cb({
         errors: [{
-        message: err.message,
-      }], full: err});
+          message: err.message,
+        }],
+        full: err,
+      });
     } else {
       cb(null, el.out.deref);
     }

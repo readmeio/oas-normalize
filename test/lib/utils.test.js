@@ -11,11 +11,7 @@ describe('#type', () => {
   });
 
   it('should return `json` for an object', () => {
-    expect(
-      utils.type(
-        JSON.parse(fs.readFileSync(jsonFixture).toString())
-      )
-    ).toBe('json');
+    expect(utils.type(JSON.parse(fs.readFileSync(jsonFixture).toString()))).toBe('json');
   });
 
   it('should return `string-json` for a stringified JSON object', () => {
@@ -30,7 +26,7 @@ describe('#type', () => {
 
   it('should return `url` for an HTTP URL', () => {
     expect(
-      utils.type('https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml')
+      utils.type('https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml'),
     ).toBe('url');
   });
 
