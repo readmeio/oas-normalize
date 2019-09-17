@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "deep-extend": "^0.6.0",
-    "json-schema-ref-parser": "^5.0.3",
+    "json-schema-ref-parser": "^7.1.1",
     "r2": "^2.0.1",
     "swagger-parser": "^4.1.0",
     "swagger2openapi": "^2.11.16",
