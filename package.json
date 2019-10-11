@@ -19,7 +19,7 @@
     "deep-extend": "^0.6.0",
     "json-schema-ref-parser": "^5.0.3",
     "r2": "^2.0.1",
-    "swagger-parser": "^4.1.0",
+    "swagger-parser": "^8.0.2",
     "swagger2openapi": "^2.11.16",
     "yamljs": "^0.3.0"
   },
