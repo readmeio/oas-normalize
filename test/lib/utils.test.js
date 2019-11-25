@@ -26,7 +26,9 @@ describe('#type', () => {
 
   it('should return `url` for an HTTP URL', () => {
     expect(
-      utils.type('https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml'),
+      utils.type(
+        'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml',
+      ),
     ).toBe('url');
   });
 
