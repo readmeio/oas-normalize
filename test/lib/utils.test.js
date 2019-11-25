@@ -18,7 +18,7 @@ describe('#type', () => {
     expect(utils.type(fs.readFileSync(jsonFixture).toString())).toBe('string-json');
   });
 
-  xit('should return `string-yaml` for a YAML string', () => {
+  it.skip('should return `string-yaml` for a YAML string', () => {
     // This currently returns `string-json` because the regex for that is matching `{`, and this
     // YAML fixture has URI templates present.
     expect(utils.type(fs.readFileSync(yamlFixture).toString())).toBe('string-yaml');
@@ -26,7 +26,9 @@ describe('#type', () => {
 
   it('should return `url` for an HTTP URL', () => {
     expect(
-      utils.type('https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml'),
+      utils.type(
+        'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml',
+      ),
     ).toBe('url');
   });
 

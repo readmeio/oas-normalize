@@ -1,8 +1,6 @@
 {
-  "extends": ["airbnb-base"],
-  "env": {
-    "jest": true
-  },
+  "extends": "@readme/eslint-config",
+  "root": true,
   "rules": {
     "consistent-return": 0,
     "no-else-return": 0

@@ -11,9 +11,12 @@ const utils = require('./lib/utils');
 class OAS {
   constructor(file, opts) {
     this.file = file;
-    this.opts = deepClone({
-      enablePaths: false,
-    }, opts);
+    this.opts = deepClone(
+      {
+        enablePaths: false,
+      },
+      opts,
+    );
     this.type = utils.type(this.file);
 
     this.out = {
@@ -27,7 +30,7 @@ class OAS {
   async load(cb) {
     if (this.out.load) return cb(null, this.out.load);
 
-    const success = (obj) => {
+    const success = obj => {
       const ret = utils.stringToJSON(obj);
       this.f_load = ret;
       cb(null, ret);
