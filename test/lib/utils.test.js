@@ -18,7 +18,7 @@ describe('#type', () => {
     expect(utils.type(fs.readFileSync(jsonFixture).toString())).toBe('string-json');
   });
 
-  xit('should return `string-yaml` for a YAML string', () => {
+  it.skip('should return `string-yaml` for a YAML string', () => {
     // This currently returns `string-json` because the regex for that is matching `{`, and this
     // YAML fixture has URI templates present.
     expect(utils.type(fs.readFileSync(yamlFixture).toString())).toBe('string-yaml');
