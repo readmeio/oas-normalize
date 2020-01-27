@@ -28,7 +28,7 @@
   "devDependencies": {
     "@readme/eslint-config": "^1.5.1",
     "eslint": "^6.4.0",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "prettier": "^1.19.1"
   }
 }
