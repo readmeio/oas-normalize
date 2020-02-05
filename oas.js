@@ -15,7 +15,7 @@ class OAS {
       {
         enablePaths: false,
       },
-      opts,
+      opts
     );
     this.type = utils.type(this.file);
 

@@ -43,7 +43,7 @@ describe('#validate', () => {
       expect.hasAssertions();
       return new Promise(done => {
         const o = new OAS(
-          'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml',
+          'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml'
         );
         o.validate((err, definition) => {
           expect(definition.openapi).toBe('3.0.0');
