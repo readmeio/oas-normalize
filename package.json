@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Swagger 2 or OAS 3? YAML or JSON? URL, path, string or object? Who cares! It just works.",
   "main": "oas.js",
+  "engines": {
+    "node": ">=10"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/readmeio/oas-normalize.git"
