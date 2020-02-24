@@ -1,6 +1,6 @@
 {
   "name": "oas-normalize",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Swagger 2 or OAS 3? YAML or JSON? URL, path, string or object? Who cares! It just works.",
   "main": "oas.js",
   "engines": {
@@ -17,6 +17,7 @@
     "lint": "eslint .",
     "pretest": "npm run prettier && npm run lint",
     "prettier": "prettier --list-different --write \"./**/**.{js,jsx}\"",
+    "release": "conventional-changelog -i CHANGELOG.md -s",
     "test": "jest --coverage"
   },
   "license": "MIT",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@readme/eslint-config": "^1.5.1",
+    "conventional-changelog-cli": "^2.0.31",
     "eslint": "^6.4.0",
     "jest": "^25.1.0",
     "prettier": "^1.19.1"
