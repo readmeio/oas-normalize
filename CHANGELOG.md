@@ -1,3 +1,14 @@
+## <small>2.0.1 (2020-03-16)</small>
+
+* chore(deps-dev): Bump @readme/eslint-config from 1.13.0 to 1.14.0 (#35) ([aa9cb49](https://github.com/readmeio/oas-normalize/commit/aa9cb49)), closes [#35](https://github.com/readmeio/oas-normalize/issues/35)
+* chore(deps-dev): Bump @readme/eslint-config from 1.14.0 to 1.15.0 (#39) ([e4573ee](https://github.com/readmeio/oas-normalize/commit/e4573ee)), closes [#39](https://github.com/readmeio/oas-normalize/issues/39)
+* chore(deps): [Security] Bump acorn from 6.4.0 to 6.4.1 (#38) ([a883229](https://github.com/readmeio/oas-normalize/commit/a883229)), closes [#38](https://github.com/readmeio/oas-normalize/issues/38)
+* chore(deps): Bump json-schema-ref-parser from 7.1.3 to 8.0.0 (#40) ([07cf44f](https://github.com/readmeio/oas-normalize/commit/07cf44f)), closes [#40](https://github.com/readmeio/oas-normalize/issues/40)
+* chore(deps): Bump swagger-parser from 8.0.4 to 9.0.1 (#41) ([34e4d95](https://github.com/readmeio/oas-normalize/commit/34e4d95)), closes [#41](https://github.com/readmeio/oas-normalize/issues/41)
+* style: run eslint before running prettier ([b6523a0](https://github.com/readmeio/oas-normalize/commit/b6523a0))
+
+
+
 ## 2.0.0 (2020-02-24)
 
 * chore(deps-dev): Bump @readme/eslint-config from 1.10.0 to 1.11.0 (#30) ([df0d87e](https://github.com/readmeio/oas-normalize/commit/df0d87e)), closes [#30](https://github.com/readmeio/oas-normalize/issues/30)
