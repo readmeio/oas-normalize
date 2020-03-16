@@ -1,3 +1,9 @@
+## <small>2.0.2 (2020-03-16)</small>
+
+* chore: adding .github/ and coverage/ into npmignore ([c71f9c3](https://github.com/readmeio/oas-normalize/commit/c71f9c3))
+
+
+
 ## <small>2.0.1 (2020-03-16)</small>
 
 * chore(deps-dev): Bump @readme/eslint-config from 1.13.0 to 1.14.0 (#35) ([aa9cb49](https://github.com/readmeio/oas-normalize/commit/aa9cb49)), closes [#35](https://github.com/readmeio/oas-normalize/issues/35)
