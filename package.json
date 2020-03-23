@@ -30,10 +30,11 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "@readme/eslint-config": "^1.5.1",
+    "@readme/eslint-config": "^2.0.0",
     "conventional-changelog-cli": "^2.0.31",
     "eslint": "^6.4.0",
     "jest": "^25.1.0",
-    "prettier": "^1.19.1"
-  }
+    "prettier": "^2.0.1"
+  },
+  "prettier": "@readme/eslint-config/prettier"
 }
