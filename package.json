@@ -26,7 +26,7 @@
     "json-schema-ref-parser": "^8.0.0",
     "r2": "^2.0.1",
     "swagger-parser": "^9.0.1",
-    "swagger2openapi": "^2.11.16",
+    "swagger2openapi": "^6.0.1",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
