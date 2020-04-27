@@ -1,3 +1,21 @@
+## 2.1.0 (2020-04-27)
+
+* chore(deps-dev): Bump @readme/eslint-config from 1.15.0 to 2.0.0 (#42) ([533fb78](https://github.com/readmeio/oas-normalize/commit/533fb78)), closes [#42](https://github.com/readmeio/oas-normalize/issues/42)
+* chore(deps-dev): Bump @readme/eslint-config from 2.0.0 to 2.0.2 (#46) ([c16aa49](https://github.com/readmeio/oas-normalize/commit/c16aa49)), closes [#46](https://github.com/readmeio/oas-normalize/issues/46)
+* chore(deps-dev): Bump @readme/eslint-config from 2.0.2 to 2.0.3 (#51) ([447214f](https://github.com/readmeio/oas-normalize/commit/447214f)), closes [#51](https://github.com/readmeio/oas-normalize/issues/51)
+* chore(deps-dev): Bump @readme/eslint-config from 2.0.3 to 2.0.4 (#56) ([e644a3d](https://github.com/readmeio/oas-normalize/commit/e644a3d)), closes [#56](https://github.com/readmeio/oas-normalize/issues/56)
+* chore(deps-dev): Bump jest from 25.1.0 to 25.2.4 (#45) ([956a379](https://github.com/readmeio/oas-normalize/commit/956a379)), closes [#45](https://github.com/readmeio/oas-normalize/issues/45)
+* chore(deps-dev): Bump jest from 25.2.4 to 25.2.7 (#49) ([b2fb35f](https://github.com/readmeio/oas-normalize/commit/b2fb35f)), closes [#49](https://github.com/readmeio/oas-normalize/issues/49)
+* chore(deps-dev): Bump jest from 25.2.7 to 25.3.0 (#53) ([0beb774](https://github.com/readmeio/oas-normalize/commit/0beb774)), closes [#53](https://github.com/readmeio/oas-normalize/issues/53)
+* chore(deps-dev): Bump jest from 25.3.0 to 25.4.0 (#54) ([e61c714](https://github.com/readmeio/oas-normalize/commit/e61c714)), closes [#54](https://github.com/readmeio/oas-normalize/issues/54)
+* chore(deps-dev): Bump prettier from 2.0.1 to 2.0.2 (#44) ([46a248a](https://github.com/readmeio/oas-normalize/commit/46a248a)), closes [#44](https://github.com/readmeio/oas-normalize/issues/44)
+* chore(deps-dev): Bump prettier from 2.0.2 to 2.0.3 (#48) ([87cf0ca](https://github.com/readmeio/oas-normalize/commit/87cf0ca)), closes [#48](https://github.com/readmeio/oas-normalize/issues/48)
+* chore(deps-dev): Bump prettier from 2.0.3 to 2.0.4 (#52) ([e7c0585](https://github.com/readmeio/oas-normalize/commit/e7c0585)), closes [#52](https://github.com/readmeio/oas-normalize/issues/52)
+* chore(deps-dev): Bump prettier from 2.0.4 to 2.0.5 (#58) ([b5f0a9e](https://github.com/readmeio/oas-normalize/commit/b5f0a9e)), closes [#58](https://github.com/readmeio/oas-normalize/issues/58)
+* chore(deps): Bump json-schema-ref-parser from 8.0.0 to 9.0.1 (#57) ([3f52981](https://github.com/readmeio/oas-normalize/commit/3f52981)), closes [#57](https://github.com/readmeio/oas-normalize/issues/57)
+
+
+
 ## <small>2.0.2 (2020-03-16)</small>
 
 * chore: adding .github/ and coverage/ into npmignore ([c71f9c3](https://github.com/readmeio/oas-normalize/commit/c71f9c3))
