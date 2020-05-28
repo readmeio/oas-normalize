@@ -1,6 +1,6 @@
 const r2 = require('r2');
 const fs = require('fs');
-const $RefParser = require('json-schema-ref-parser');
+const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const deepClone = require('deep-extend');
 const converter = require('swagger2openapi');
 
@@ -11,12 +11,7 @@ const utils = require('./lib/utils');
 class OAS {
   constructor(file, opts) {
     this.file = file;
-    this.opts = deepClone(
-      {
-        enablePaths: false,
-      },
-      opts
-    );
+    this.opts = deepClone({ enablePaths: false }, opts);
     this.type = utils.type(this.file);
 
     this.out = {
