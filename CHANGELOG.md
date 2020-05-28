@@ -1,3 +1,16 @@
+## 2.2.0 (2020-05-28)
+
+* chore(deps-dev): Bump @readme/eslint-config from 2.0.4 to 2.0.6 (#60) ([103f1c3](https://github.com/readmeio/oas-normalize/commit/103f1c3)), closes [#60](https://github.com/readmeio/oas-normalize/issues/60)
+* chore(deps-dev): Bump @readme/eslint-config from 2.0.6 to 2.2.0 (#63) ([4a9c96c](https://github.com/readmeio/oas-normalize/commit/4a9c96c)), closes [#63](https://github.com/readmeio/oas-normalize/issues/63)
+* chore(deps-dev): Bump conventional-changelog-cli from 2.0.31 to 2.0.34 (#62) ([301148c](https://github.com/readmeio/oas-normalize/commit/301148c)), closes [#62](https://github.com/readmeio/oas-normalize/issues/62)
+* chore(deps-dev): Bump jest from 25.4.0 to 25.5.4 (#59) ([95c46e7](https://github.com/readmeio/oas-normalize/commit/95c46e7)), closes [#59](https://github.com/readmeio/oas-normalize/issues/59)
+* chore(deps-dev): Bump jest from 25.5.4 to 26.0.1 (#61) ([2a8de9a](https://github.com/readmeio/oas-normalize/commit/2a8de9a)), closes [#61](https://github.com/readmeio/oas-normalize/issues/61)
+* chore(deps-dev): upgrading our eslint deps to their latest release ([b2c477c](https://github.com/readmeio/oas-normalize/commit/b2c477c))
+* chore(deps): swapping `yamljs` for `yaml` ([03e4163](https://github.com/readmeio/oas-normalize/commit/03e4163))
+* chore(deps): upgrading json-schema-ref-parser to the latest release ([8a0ed5b](https://github.com/readmeio/oas-normalize/commit/8a0ed5b))
+
+
+
 ## 2.1.0 (2020-04-27)
 
 * chore(deps-dev): Bump @readme/eslint-config from 1.15.0 to 2.0.0 (#42) ([533fb78](https://github.com/readmeio/oas-normalize/commit/533fb78)), closes [#42](https://github.com/readmeio/oas-normalize/issues/42)
