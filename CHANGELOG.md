@@ -1,3 +1,9 @@
+## <small>2.2.1 (2020-06-03)</small>
+
+* chore(deps): [Security] Bump minimist from 1.2.0 to 1.2.5 (#64) ([784ba61](https://github.com/readmeio/oas-normalize/commit/784ba61)), closes [#64](https://github.com/readmeio/oas-normalize/issues/64)
+
+
+
 ## 2.2.0 (2020-05-28)
 
 * chore(deps-dev): Bump @readme/eslint-config from 2.0.4 to 2.0.6 (#60) ([103f1c3](https://github.com/readmeio/oas-normalize/commit/103f1c3)), closes [#60](https://github.com/readmeio/oas-normalize/issues/60)
