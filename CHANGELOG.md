@@ -1,3 +1,19 @@
+## <small>2.2.2 (2020-07-20)</small>
+
+* build(deps-dev): bump @readme/eslint-config from 3.1.0 to 3.1.3 (#68) ([3cce9b6](https://github.com/readmeio/oas-normalize/commit/3cce9b6)), closes [#68](https://github.com/readmeio/oas-normalize/issues/68)
+* build(deps-dev): bump @readme/eslint-config from 3.1.3 to 3.2.0 (#70) ([d9f5e5a](https://github.com/readmeio/oas-normalize/commit/d9f5e5a)), closes [#70](https://github.com/readmeio/oas-normalize/issues/70)
+* build(deps-dev): bump @readme/eslint-config from 3.2.0 to 3.2.1 (#72) ([352dfd5](https://github.com/readmeio/oas-normalize/commit/352dfd5)), closes [#72](https://github.com/readmeio/oas-normalize/issues/72)
+* build(deps-dev): bump @readme/eslint-config from 3.2.1 to 3.3.2 (#74) ([205a8e4](https://github.com/readmeio/oas-normalize/commit/205a8e4)), closes [#74](https://github.com/readmeio/oas-normalize/issues/74)
+* build(deps-dev): bump eslint from 7.1.0 to 7.2.0 (#69) ([b2030e9](https://github.com/readmeio/oas-normalize/commit/b2030e9)), closes [#69](https://github.com/readmeio/oas-normalize/issues/69)
+* build(deps-dev): bump eslint from 7.2.0 to 7.3.1 (#73) ([25c9a35](https://github.com/readmeio/oas-normalize/commit/25c9a35)), closes [#73](https://github.com/readmeio/oas-normalize/issues/73)
+* build(deps-dev): bump jest from 26.0.1 to 26.1.0 (#75) ([951cce6](https://github.com/readmeio/oas-normalize/commit/951cce6)), closes [#75](https://github.com/readmeio/oas-normalize/issues/75)
+* build(deps): bump lodash from 4.17.15 to 4.17.19 (#76) ([4afbc32](https://github.com/readmeio/oas-normalize/commit/4afbc32)), closes [#76](https://github.com/readmeio/oas-normalize/issues/76)
+* ci: create Dependabot config file (#65) ([40b5a3a](https://github.com/readmeio/oas-normalize/commit/40b5a3a)), closes [#65](https://github.com/readmeio/oas-normalize/issues/65)
+* ci: run tests against node 14 (#66) ([e1de3da](https://github.com/readmeio/oas-normalize/commit/e1de3da)), closes [#66](https://github.com/readmeio/oas-normalize/issues/66)
+* ci: upping the frequency of dependabot to monthly ([469d2ec](https://github.com/readmeio/oas-normalize/commit/469d2ec))
+
+
+
 ## <small>2.2.1 (2020-06-03)</small>
 
 * chore(deps): [Security] Bump minimist from 1.2.0 to 1.2.5 (#64) ([784ba61](https://github.com/readmeio/oas-normalize/commit/784ba61)), closes [#64](https://github.com/readmeio/oas-normalize/issues/64)
