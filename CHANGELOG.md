@@ -1,3 +1,13 @@
+## 2.3.0 (2020-08-03)
+
+* build(deps-dev): bump @readme/eslint-config from 3.3.2 to 3.4.0 (#81) ([e36adc6](https://github.com/readmeio/oas-normalize/commit/e36adc6)), closes [#81](https://github.com/readmeio/oas-normalize/issues/81)
+* build(deps-dev): bump eslint from 7.3.1 to 7.6.0 (#77) ([90c9908](https://github.com/readmeio/oas-normalize/commit/90c9908)), closes [#77](https://github.com/readmeio/oas-normalize/issues/77)
+* build(deps-dev): bump jest from 26.1.0 to 26.2.2 (#79) ([a63e73c](https://github.com/readmeio/oas-normalize/commit/a63e73c)), closes [#79](https://github.com/readmeio/oas-normalize/issues/79)
+* build(deps): bump @apidevtools/json-schema-ref-parser (#78) ([b9832ab](https://github.com/readmeio/oas-normalize/commit/b9832ab)), closes [#78](https://github.com/readmeio/oas-normalize/issues/78)
+* build(deps): bump swagger-parser from 9.0.1 to 10.0.1 (#82) ([9f821a3](https://github.com/readmeio/oas-normalize/commit/9f821a3)), closes [#82](https://github.com/readmeio/oas-normalize/issues/82)
+
+
+
 ## <small>2.2.2 (2020-07-20)</small>
 
 * build(deps-dev): bump @readme/eslint-config from 3.1.0 to 3.1.3 (#68) ([3cce9b6](https://github.com/readmeio/oas-normalize/commit/3cce9b6)), closes [#68](https://github.com/readmeio/oas-normalize/issues/68)
