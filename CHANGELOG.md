@@ -1,3 +1,14 @@
+## <small>2.3.1 (2020-09-11)</small>
+
+* build(deps-dev): bump @readme/eslint-config from 3.4.0 to 3.4.2 (#86) ([6615b5b](https://github.com/readmeio/oas-normalize/commit/6615b5b)), closes [#86](https://github.com/readmeio/oas-normalize/issues/86)
+* build(deps-dev): bump conventional-changelog-cli from 2.0.34 to 2.1.0 (#83) ([6b5afbb](https://github.com/readmeio/oas-normalize/commit/6b5afbb)), closes [#83](https://github.com/readmeio/oas-normalize/issues/83)
+* build(deps-dev): bump eslint from 7.6.0 to 7.8.0 (#88) ([9e03439](https://github.com/readmeio/oas-normalize/commit/9e03439)), closes [#88](https://github.com/readmeio/oas-normalize/issues/88)
+* build(deps-dev): bump jest from 26.2.2 to 26.4.2 (#85) ([ad371bf](https://github.com/readmeio/oas-normalize/commit/ad371bf)), closes [#85](https://github.com/readmeio/oas-normalize/issues/85)
+* build(deps-dev): bump prettier from 2.0.5 to 2.1.1 (#84) ([ce88131](https://github.com/readmeio/oas-normalize/commit/ce88131)), closes [#84](https://github.com/readmeio/oas-normalize/issues/84)
+* build(deps): bump node-fetch from 2.1.2 to 2.6.1 (#89) ([8e05e60](https://github.com/readmeio/oas-normalize/commit/8e05e60)), closes [#89](https://github.com/readmeio/oas-normalize/issues/89)
+
+
+
 ## 2.3.0 (2020-08-03)
 
 * build(deps-dev): bump @readme/eslint-config from 3.3.2 to 3.4.0 (#81) ([e36adc6](https://github.com/readmeio/oas-normalize/commit/e36adc6)), closes [#81](https://github.com/readmeio/oas-normalize/issues/81)
