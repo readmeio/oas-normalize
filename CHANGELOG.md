@@ -1,3 +1,26 @@
+## 3.0.0 (2021-06-03)
+
+> 🚨 &nbsp;**Breaking change!**
+>
+> `oas-normalize` has been fully rewritten to be promise-based, and no longer supports callbacks. If you have an existing implementation of this library you'll need to rewrite it to support `await`ing the promises returned.
+
+* chore(deps-dev): upgrading @readme/eslint-config from 3.1.0 to 5.1.0 ([af4874b](https://github.com/readmeio/oas-normalize/commit/af4874b)),  ([e0e8d09](https://github.com/readmeio/oas-normalize/commit/e0e8d09)), ([c211bc9](https://github.com/readmeio/oas-normalize/commit/c211bc9)), ([ab29f15](https://github.com/readmeio/oas-normalize/commit/ab29f15)), ([5732ed1](https://github.com/readmeio/oas-normalize/commit/5732ed1)), ([3917699](https://github.com/readmeio/oas-normalize/commit/3917699)), ([1dcd5c7](https://github.com/readmeio/oas-normalize/commit/1dcd5c7))
+* chore(deps): bump actions/checkout from 1 to 2.3.4 (#133) ([49fd5ae](https://github.com/readmeio/oas-normalize/commit/49fd5ae)), closes [#133](https://github.com/readmeio/oas-normalize/issues/133)
+* chore(deps): bump actions/setup-node from 1 to 2.1.5 (#132) ([e1b3aa0](https://github.com/readmeio/oas-normalize/commit/e1b3aa0)), closes [#132](https://github.com/readmeio/oas-normalize/issues/132)
+* chore(deps): running `npm audit fix` ([184591b](https://github.com/readmeio/oas-normalize/commit/184591b))
+* build(deps-dev): bump eslint from 7.8.0 to 7.25.0 ([f674f21](https://github.com/readmeio/oas-normalize/commit/f674f21)), ([efeb5f6](https://github.com/readmeio/oas-normalize/commit/efeb5f6)), ([a0f80bd](https://github.com/readmeio/oas-normalize/commit/a0f80bd)), ([aed9be1](https://github.com/readmeio/oas-normalize/commit/aed9be1)), ([731cac8](https://github.com/readmeio/oas-normalize/commit/731cac8))
+* build(deps-dev): bump jest from 26.4.2 to 27.0.4  ([a58609e](https://github.com/readmeio/oas-normalize/commit/a58609e)), ([ec0404d](https://github.com/readmeio/oas-normalize/commit/ec0404d)), ([eb19bce](https://github.com/readmeio/oas-normalize/commit/eb19bce))
+* build(deps-dev): bump prettier from 2.1.1 to 2.3.0 ([8106028](https://github.com/readmeio/oas-normalize/commit/8106028)), ([044af3c](https://github.com/readmeio/oas-normalize/commit/044af3c)), ([798d229](https://github.com/readmeio/oas-normalize/commit/798d229))
+* build(deps): bump handlebars from 4.7.6 to 4.7.7 (#122) ([b9af22c](https://github.com/readmeio/oas-normalize/commit/b9af22c)), closes [#122](https://github.com/readmeio/oas-normalize/issues/122)
+* build(deps): bump hosted-git-info from 2.8.5 to 2.8.9 (#124) ([6fa9181](https://github.com/readmeio/oas-normalize/commit/6fa9181)), closes [#124](https://github.com/readmeio/oas-normalize/issues/124)
+* build(deps): bump lodash from 4.17.19 to 4.17.21 (#123) ([f65ac71](https://github.com/readmeio/oas-normalize/commit/f65ac71)), closes [#123](https://github.com/readmeio/oas-normalize/issues/123)
+* build(deps): bump node-notifier from 8.0.0 to 8.0.1 (#107) ([f1ea9ef](https://github.com/readmeio/oas-normalize/commit/f1ea9ef)), closes [#107](https://github.com/readmeio/oas-normalize/issues/107)
+* build(deps): bump swagger-parser from 10.0.1 to 10.0.2 (#92) ([db45a42](https://github.com/readmeio/oas-normalize/commit/db45a42)), closes [#92](https://github.com/readmeio/oas-normalize/issues/92)
+* build(deps): bump ws from 7.4.0 to 7.4.6 (#125) ([e884b1d](https://github.com/readmeio/oas-normalize/commit/e884b1d)), closes [#125](https://github.com/readmeio/oas-normalize/issues/125)
+* feat: promises rewrite and drop support for node 10 (#131) ([5f1f5f5](https://github.com/readmeio/oas-normalize/commit/5f1f5f5)), closes [#131](https://github.com/readmeio/oas-normalize/issues/131)
+
+
+
 ## <small>2.3.1 (2020-09-11)</small>
 
 * build(deps-dev): bump @readme/eslint-config from 3.4.0 to 3.4.2 (#86) ([6615b5b](https://github.com/readmeio/oas-normalize/commit/6615b5b)), closes [#86](https://github.com/readmeio/oas-normalize/issues/86)
