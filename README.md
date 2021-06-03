@@ -2,6 +2,8 @@ Swagger 2 or OAS 3? YAML or JSON? URL, path, string or object? Who cares! It jus
 
 This module uses a bunch of other great modules to do the heavy lifting, and normalizes everything!
 
+[![Build](https://github.com/readmeio/oas-normalize/workflows/CI/badge.svg)](https://github.com/readmeio/oas-normalize/) [![](https://img.shields.io/npm/v/oas-normalize)](https://npm.im/oas-normalize)
+
 [![](https://cl.ly/1h271F1M1e2T/Untitled-2.png)](http://readme.io)
 
 # Install
@@ -15,15 +17,14 @@ npm install oas-normalize --save
 It's pretty simple:
 
 ```javascript
-const OAS = require('oas-normalize');
+const OASNormalize = require('oas-normalize');
 
-const oas = new OAS('https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml'); // Or a string, pathname, JSON blob, whatever
-oas.validate((err, spec) => {
-  if (err) {
-    console.log(err.errors);
-    return;
-  }
-  console.log(spec); // spec will always be JSON, and valid
+const oas = new OASNormalize('https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml'); // Or a string, pathname, JSON blob, whatever
+
+oas.validate().then(definition => {
+  console.log(definition); // definition will always be JSON, and valid
+}).catch(err => {
+  console.log(err.errors);
 });
 ```
 
@@ -31,7 +32,7 @@ oas.validate((err, spec) => {
 
 For validation errors, when available, you'll get back an object:
 
-```
+```json
 {
   "errors": [
     {
@@ -47,22 +48,32 @@ For validation errors, when available, you'll get back an object:
 
 # Helper functions
 
+> **Note:** All of these functions are promise-driven.
+
 If you want some more functionality, you can do anything here:
 
-| Function       | What it does                                                   |
-|----------------|----------------------------------------------------------------|
-| oas.load(cb)      | Just load the file, valid or not, as JSON                      |
-| oas.bundle(cb)    | Bring together all files into one JSON blob (but keep `$refs`) |
-| oas.deref(cb)     | Resolve `$refs`                                                |
-| oas.validate(cb, [convertToLatest?]))  | Validate the whole thing!                |
+| Function | What it does |
+| :--- | :--- |
+| `.load()` | Just load the file, valid or not, as JSON |
+| `.bundle()` | Bring together all files into one JSON blob (but retain `$ref` pointers) |
+| `.deref()` | Resolve `$ref` pointers |
+| `.validate([convertToLatest?]))` | Validate the whole thing! |
 
 # Other little features
 
 ### Always return OAS 3
 
-If you want `.validate` to always return a OAS 3 document, include a `true` as the second param: `oas.validate(action, true);`
+If you want `.validate` to always return an OpenAPI 3.0 definition, supply `true` as its argument:
+
+```js
+OASNormalize.validate(true).then(...);
+```
 
 ### Enable local paths
 
-For security reasons, you need to enable it. Use `new OAS('./whatever.json', { enablePaths: true })` to load local files.
+For security reasons, you need to enable it; supply `enablePaths` to the class instance:
+
+```js
+const oas = new OASNormalize('./petstore.json', { enablePaths: true })
+```
 
