@@ -57,7 +57,7 @@ If you want some more functionality, you can do anything here:
 | `.load()` | Just load the file, valid or not, as JSON |
 | `.bundle()` | Bring together all files into one JSON blob (but retain `$ref` pointers) |
 | `.deref()` | Resolve `$ref` pointers |
-| `.validate([convertToLatest?]))` | Validate the whole thing! |
+| `.validate([convertToLatest?])` | Validate the whole thing! |
 
 # Other little features
 
