@@ -2,7 +2,7 @@
   "name": "oas-normalize",
   "version": "2.3.1",
   "description": "Swagger 2 or OAS 3? YAML or JSON? URL, path, string or object? Who cares! It just works.",
-  "main": "oas.js",
+  "main": "index.js",
   "engines": {
     "node": "^12 || ^14 || ^16"
   },
@@ -22,18 +22,19 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^9.0.1",
-    "deep-extend": "^0.6.0",
-    "r2": "^2.0.1",
+    "@apidevtools/json-schema-ref-parser": "^9.0.7",
+    "node-fetch": "^2.6.1",
     "swagger-parser": "^10.0.1",
-    "swagger2openapi": "^2.11.16",
+    "swagger2openapi": "^7.0.6",
     "yaml": "^1.10.0"
   },
   "devDependencies": {
     "@readme/eslint-config": "^5.0.0",
+    "@readme/oas-examples": "^4.2.0",
     "conventional-changelog-cli": "^2.0.31",
     "eslint": "^7.1.0",
     "jest": "^27.0.3",
+    "nock": "^13.1.0",
     "prettier": "^2.0.1"
   },
   "prettier": "@readme/eslint-config/prettier"
