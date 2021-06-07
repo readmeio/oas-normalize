@@ -89,26 +89,25 @@ class oasNormalize {
       } else if (baseVersion === 2 || baseVersion === 3) {
         return resolve(
           await SwaggerParser.validate(schema).catch(err => {
-            if (err.details && err.details.length) {
-              return Promise.resolve({
-                errors: [
-                  {
-                    message: err.details[0].message,
-                    path: err.details[0].path,
-                  },
-                ],
-                full: err,
-              });
-            }
+            const error = new Error(err.message.replace(/\[object Object\]/g, 'Schema'));
+            error.full = err;
 
-            return Promise.resolve({
-              errors: [
+            if (err.details && err.details.length) {
+              error.errors = [
+                {
+                  message: err.details[0].message,
+                  path: err.details[0].path,
+                },
+              ];
+            } else {
+              error.errors = [
                 {
                   message: err.message.replace(/\[object Object\]/g, 'Schema'),
                 },
-              ],
-              full: err,
-            });
+              ];
+            }
+
+            return Promise.reject(error);
           })
         );
       }

@@ -155,14 +155,40 @@ describe('#validate', () => {
       expect(await o.validate()).toStrictEqual(swagger);
     });
 
-    it('should error out on a definition an invalid definition', async () => {
-      const contents = path.join(__dirname, '__fixtures__', 'invalid', 'swagger.json');
-      const o = new OASNormalize(contents, { enablePaths: true });
+    describe('error handling', () => {
+      it('should error out on a definition a missing component', async () => {
+        const contents = path.join(__dirname, '__fixtures__', 'invalid', 'swagger.json');
+        const o = new OASNormalize(contents, { enablePaths: true });
 
-      expect.hasAssertions();
-      await o.validate().catch(err => {
-        // eslint-disable-next-line jest/no-conditional-expect
-        expect(err.message).toBe('Token "Category" does not exist.');
+        expect.hasAssertions();
+        await o.validate().catch(err => {
+          // eslint-disable-next-line jest/no-conditional-expect
+          expect(err.message).toBe('Token "Category" does not exist.');
+        });
+      });
+
+      it("should error out when a definition doesn't match the spec", async () => {
+        // This definition is missing `paths`, which should incur a failed validation check.
+        const contents = {
+          openapi: '3.0.3',
+          info: {
+            title: 'Example OpenAPI base file for `oas`.',
+            version: '1.0',
+          },
+          servers: [
+            {
+              url: 'https://api.example.com',
+            },
+          ],
+        };
+
+        const o = new OASNormalize(contents);
+        expect.hasAssertions();
+
+        await o.validate().catch(err => {
+          // eslint-disable-next-line jest/no-conditional-expect
+          expect(err.message).toBe('Schema is not a valid Openapi API definition');
+        });
       });
     });
   });
