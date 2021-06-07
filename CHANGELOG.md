@@ -1,3 +1,10 @@
+## <small>3.0.1 (2021-06-07)</small>
+
+* fix: `validate` will now reject the promise on validation errors ([3a2a0da](https://github.com/readmeio/oas-normalize/commit/3a2a0da))
+* docs: fixing a typo in the readme ([f538aff](https://github.com/readmeio/oas-normalize/commit/f538aff))
+
+
+
 ## 3.0.0 (2021-06-03)
 
 > 🚨 &nbsp;**Breaking change!**
