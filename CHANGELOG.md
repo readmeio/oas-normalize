@@ -1,3 +1,9 @@
+## <small>3.0.2 (2021-06-09)</small>
+
+* fix: swapping out `yaml` for `js-yaml` because it can handle quirky indents ([fe66cfa](https://github.com/readmeio/oas-normalize/commit/fe66cfa))
+
+
+
 ## <small>3.0.1 (2021-06-07)</small>
 
 * fix: `validate` will now reject the promise on validation errors ([3a2a0da](https://github.com/readmeio/oas-normalize/commit/3a2a0da))
