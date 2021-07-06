@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.7",
-    "js-yaml": "^3.13.1",
+    "js-yaml": "^4.1.0",
     "node-fetch": "^2.6.1",
     "swagger-parser": "^10.0.1",
     "swagger2openapi": "^7.0.6"
