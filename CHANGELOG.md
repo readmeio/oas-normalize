@@ -1,3 +1,15 @@
+## <small>3.0.3 (2021-07-06)</small>
+
+* build(deps-dev): bump eslint from 7.25.0 to 7.29.0 (#139) ([cbc7d8e](https://github.com/readmeio/oas-normalize/commit/cbc7d8e)), closes [#139](https://github.com/readmeio/oas-normalize/issues/139)
+* build(deps-dev): bump jest from 27.0.4 to 27.0.6 (#140) ([e09a863](https://github.com/readmeio/oas-normalize/commit/e09a863)), closes [#140](https://github.com/readmeio/oas-normalize/issues/140)
+* build(deps-dev): bump prettier from 2.3.0 to 2.3.2 (#137) ([3b609f5](https://github.com/readmeio/oas-normalize/commit/3b609f5)), closes [#137](https://github.com/readmeio/oas-normalize/issues/137)
+* build(deps): bump @apidevtools/json-schema-ref-parser (#138) ([83d8bf4](https://github.com/readmeio/oas-normalize/commit/83d8bf4)), closes [#138](https://github.com/readmeio/oas-normalize/issues/138)
+* build(deps): bump js-yaml from 3.13.1 to 4.1.0 (#136) ([6d6c459](https://github.com/readmeio/oas-normalize/commit/6d6c459)), closes [#136](https://github.com/readmeio/oas-normalize/issues/136)
+* build(deps): bump swagger2openapi from 7.0.6 to 7.0.7 (#141) ([a8ad128](https://github.com/readmeio/oas-normalize/commit/a8ad128)), closes [#141](https://github.com/readmeio/oas-normalize/issues/141)
+* chore(deps): bump actions/setup-node from 2.1.5 to 2.2.0 (#142) ([78e0c25](https://github.com/readmeio/oas-normalize/commit/78e0c25)), closes [#142](https://github.com/readmeio/oas-normalize/issues/142)
+
+
+
 ## <small>3.0.2 (2021-06-09)</small>
 
 * fix: swapping out `yaml` for `js-yaml` because it can handle quirky indents ([fe66cfa](https://github.com/readmeio/oas-normalize/commit/fe66cfa))
