@@ -71,7 +71,7 @@ OASNormalize.validate(true).then(...);
 
 ### Enable local paths
 
-For security reasons, you need to enable it; supply `enablePaths` to the class instance:
+For security reasons, you need to opt into allowing fetching by a local path. To enable it supply the `enablePaths` option to the class instance:
 
 ```js
 const oas = new OASNormalize('./petstore.json', { enablePaths: true })
