@@ -29,7 +29,7 @@
     "swagger2openapi": "^7.0.6"
   },
   "devDependencies": {
-    "@readme/eslint-config": "^5.0.0",
+    "@readme/eslint-config": "^6.0.0",
     "@readme/oas-examples": "^4.2.0",
     "conventional-changelog-cli": "^2.0.31",
     "eslint": "^7.1.0",
