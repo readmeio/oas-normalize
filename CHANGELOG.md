@@ -1,3 +1,11 @@
+## <small>3.0.4 (2021-08-02)</small>
+
+* chore(deps): bump actions/setup-node from 2.2.0 to 2.3.0 (#147) ([7b66274](https://github.com/readmeio/oas-normalize/commit/7b66274)), closes [#147](https://github.com/readmeio/oas-normalize/issues/147)
+* chore(deps): bumping deps ([61c9c09](https://github.com/readmeio/oas-normalize/commit/61c9c09))
+* docs: some minor updates to the readme ([b75fe43](https://github.com/readmeio/oas-normalize/commit/b75fe43))
+
+
+
 ## <small>3.0.3 (2021-07-06)</small>
 
 * build(deps-dev): bump eslint from 7.25.0 to 7.29.0 (#139) ([cbc7d8e](https://github.com/readmeio/oas-normalize/commit/cbc7d8e)), closes [#139](https://github.com/readmeio/oas-normalize/issues/139)
