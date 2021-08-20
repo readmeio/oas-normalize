@@ -1,3 +1,12 @@
+## <small>3.0.5 (2021-08-20)</small>
+
+* chore: running npm audit ([6dc30cf](https://github.com/readmeio/oas-normalize/commit/6dc30cf))
+* chore(deps-dev): bump nock from 13.1.1 to 13.1.2 (#150) ([dba5e40](https://github.com/readmeio/oas-normalize/commit/dba5e40)), closes [#150](https://github.com/readmeio/oas-normalize/issues/150)
+* chore(deps): bump actions/setup-node from 2.3.0 to 2.4.0 (#149) ([b43483c](https://github.com/readmeio/oas-normalize/commit/b43483c)), closes [#149](https://github.com/readmeio/oas-normalize/issues/149)
+* chore(deps): bump swagger-parser from 10.0.2 to 10.0.3 (#151) ([d046bbd](https://github.com/readmeio/oas-normalize/commit/d046bbd)), closes [#151](https://github.com/readmeio/oas-normalize/issues/151)
+
+
+
 ## <small>3.0.4 (2021-08-02)</small>
 
 * chore(deps): bump actions/setup-node from 2.2.0 to 2.3.0 (#147) ([7b66274](https://github.com/readmeio/oas-normalize/commit/7b66274)), closes [#147](https://github.com/readmeio/oas-normalize/issues/147)
