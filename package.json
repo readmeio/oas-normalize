@@ -1,11 +1,26 @@
 {
   "name": "oas-normalize",
   "version": "3.0.5",
-  "description": "Swagger 2 or OAS 3? YAML or JSON? URL, path, string or object? Who cares! It just works.",
+  "description": "OpenAPI 3 or Swagger 2? YAML or JSON? URL, path, string or object? Who cares! It just works.",
   "main": "index.js",
   "engines": {
     "node": "^12 || ^14 || ^16"
   },
+  "tags": [
+    "api",
+    "apis",
+    "openapi",
+    "swagger",
+    "openapi initiative",
+    "openapi specification",
+    "openapi spec",
+    "openapi document",
+    "oai",
+    "oas",
+    "apidoc",
+    "microservice",
+    "documentation"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/readmeio/oas-normalize.git"
