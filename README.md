@@ -1,10 +1,10 @@
-Swagger 2 or OAS 3? YAML or JSON? URL, path, string or object? Who cares! It just works.
+OpenAPI 3 or Swagger 2? YAML or JSON? URL, path, string or object? Who cares! It just works.
 
 This module uses a bunch of other great modules to do the heavy lifting, and normalizes everything!
 
 [![Build](https://github.com/readmeio/oas-normalize/workflows/CI/badge.svg)](https://github.com/readmeio/oas-normalize/) [![](https://img.shields.io/npm/v/oas-normalize)](https://npm.im/oas-normalize)
 
-[![](https://cl.ly/1h271F1M1e2T/Untitled-2.png)](http://readme.io)
+[![](https://d3vv6lp55qjaqc.cloudfront.net/items/1M3C3j0I0s0j3T362344/Untitled-2.png)](https://readme.com)
 
 # Install
 
@@ -46,7 +46,7 @@ For validation errors, when available, you'll get back an object:
 
 `message` is almost always there, but `path` is less dependable.
 
-# Helper functions
+# Helper Functions
 
 > **Note:** All of these functions are promise-driven.
 
@@ -59,21 +59,20 @@ If you want some more functionality, you can do anything here:
 | `.deref()` | Resolve `$ref` pointers |
 | `.validate([convertToLatest?])` | Validate the whole thing! |
 
-# Other little features
+# Other Little Features
 
-### Always return OAS 3
+### Always Return OpenAPI 3.x
 
-If you want `.validate` to always return an OpenAPI 3.0 definition, supply `true` as its argument:
+If you want `.validate` to always return an OpenAPI 3.x definition, supply `true` as its argument:
 
 ```js
 OASNormalize.validate(true).then(...);
 ```
 
-### Enable local paths
+### Enable Local Paths
 
 For security reasons, you need to opt into allowing fetching by a local path. To enable it supply the `enablePaths` option to the class instance:
 
 ```js
 const oas = new OASNormalize('./petstore.json', { enablePaths: true })
 ```
-
