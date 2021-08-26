@@ -1,3 +1,15 @@
+## 4.0.0 (2021-08-26)
+
+> 🚨 &nbsp;**Breaking change!**
+>
+> `.validate()` will no longer dereference schemas. If you need to dereference before or after validating, you shoudl use the `.deref()` method instead.
+
+* fix: stop dereferencing when running spec validation (#153) ([7b706db](https://github.com/readmeio/oas-normalize/commit/7b706db)), closes [#153](https://github.com/readmeio/oas-normalize/issues/153)
+* docs: adding a pull request template ([16da316](https://github.com/readmeio/oas-normalize/commit/16da316))
+* docs: make docs more OpenAPI friendly (#152) ([68cfc34](https://github.com/readmeio/oas-normalize/commit/68cfc34)), closes [#152](https://github.com/readmeio/oas-normalize/issues/152)
+
+
+
 ## <small>3.0.5 (2021-08-20)</small>
 
 * chore: running npm audit ([6dc30cf](https://github.com/readmeio/oas-normalize/commit/6dc30cf))
