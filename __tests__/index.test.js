@@ -130,6 +130,7 @@ describe('#validate', () => {
       expect(definition.openapi).toBe('3.0.0');
       expect(Object.keys(definition.paths)).toHaveLength(14);
       expect(definition.paths['/pet'].post.operationId).toBe('addPet');
+      expect(definition.paths['/pet'].post.requestBody).toStrictEqual({ $ref: '#/components/requestBodies/Pet' });
       expect(Object.keys(definition.components.requestBodies)).toHaveLength(2);
       expect(Object.keys(definition.components.securitySchemes)).toHaveLength(2);
       expect(Object.keys(definition.components.schemas)).toHaveLength(6);
@@ -145,6 +146,7 @@ describe('#validate', () => {
       expect(definition.openapi).toBe('3.0.0');
       expect(Object.keys(definition.paths)).toHaveLength(14);
       expect(definition.paths['/pet'].post.operationId).toBe('addPet');
+      expect(definition.paths['/pet'].post.requestBody).toStrictEqual({ $ref: '#/components/requestBodies/Pet' });
       expect(Object.keys(definition.components.requestBodies)).toHaveLength(2);
       expect(Object.keys(definition.components.securitySchemes)).toHaveLength(2);
       expect(Object.keys(definition.components.schemas)).toHaveLength(6);
@@ -202,6 +204,7 @@ describe('#validate', () => {
 
       expect(definition.openapi).toBe('3.0.0');
       expect(definition.paths['/pet'].post.operationId).toBe('addPet');
+      expect(definition.paths['/pet'].post.requestBody).toStrictEqual({ $ref: '#/components/requestBodies/Pet' });
       expect(Object.keys(definition.paths)).toHaveLength(14);
       expect(Object.keys(definition.components.schemas)).toHaveLength(6);
 
@@ -214,6 +217,7 @@ describe('#validate', () => {
 
       expect(definition.openapi).toBe('3.0.0');
       expect(definition.paths['/pet'].post.operationId).toBe('addPet');
+      expect(definition.paths['/pet'].post.requestBody).toStrictEqual({ $ref: '#/components/requestBodies/Pet' });
       expect(Object.keys(definition.paths)).toHaveLength(14);
       expect(Object.keys(definition.components.schemas)).toHaveLength(6);
     });

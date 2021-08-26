@@ -1,8 +1,7 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
-const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const converter = require('swagger2openapi');
-const SwaggerParser = require('swagger-parser');
+const swaggerParser = require('@apidevtools/swagger-parser');
 const utils = require('./lib/utils');
 
 class oasNormalize {
@@ -52,7 +51,7 @@ class oasNormalize {
     if (this.cache.bundle) return Promise.resolve(this.cache.bundle);
 
     return this.load()
-      .then(schema => $RefParser.bundle(schema))
+      .then(schema => swaggerParser.bundle(schema))
       .then(bundle => {
         this.cache.bundle = bundle;
         return bundle;
@@ -63,7 +62,7 @@ class oasNormalize {
     if (this.cache.deref) return Promise.resolve(this.cache.deref);
 
     return this.load()
-      .then(schema => $RefParser.dereference(schema))
+      .then(schema => swaggerParser.dereference(schema))
       .then(dereferenced => {
         this.cache.deref = dereferenced;
         return dereferenced;
@@ -71,24 +70,31 @@ class oasNormalize {
   }
 
   async validate(convertToLatest) {
-    return this.deref().then(async schema => {
+    return this.load().then(async schema => {
       const baseVersion = parseInt(utils.version(schema), 10);
-
-      const resolve = out => {
-        if (!convertToLatest) {
-          return out;
-        }
-
-        return converter.convertObj(out, { anchors: true }).then(options => {
-          return options.openapi;
-        });
-      };
 
       if (baseVersion === 1) {
         return Promise.reject(new Error('Swagger v1.2 is unsupported.'));
       } else if (baseVersion === 2 || baseVersion === 3) {
-        return resolve(
-          await SwaggerParser.validate(schema).catch(err => {
+        // `swaggerParser.validate()` dereferences schemas at the same time as validation and does
+        // not give us an option to disable this. Since all we already have a dereferencing method
+        // on this library and our `validate()` method here just needs to tell us if the definition
+        // is valid or not we need to clone it before passing it over to `swagger-parser` so as to
+        // not run into pass-by-reference problems.
+        const clonedSchema = JSON.parse(JSON.stringify(schema));
+
+        return swaggerParser
+          .validate(clonedSchema)
+          .then(() => {
+            if (!convertToLatest) {
+              return schema;
+            }
+
+            return converter.convertObj(schema, { anchors: true }).then(options => {
+              return options.openapi;
+            });
+          })
+          .catch(err => {
             const error = new Error(err.message.replace(/\[object Object\]/g, 'Schema'));
             error.full = err;
 
@@ -108,8 +114,7 @@ class oasNormalize {
             }
 
             return Promise.reject(error);
-          })
-        );
+          });
       }
 
       return Promise.reject(new Error('The supplied API definition is unsupported.'));
