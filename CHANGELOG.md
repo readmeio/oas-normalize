@@ -1,3 +1,12 @@
+## <small>4.0.1 (2021-09-01)</small>
+
+* chore(deps-dev): bump @readme/eslint-config from 6.0.0 to 6.1.0 (#157) ([df79698](https://github.com/readmeio/oas-normalize/commit/df79698)), closes [#157](https://github.com/readmeio/oas-normalize/issues/157)
+* chore(deps-dev): bump nock from 13.1.2 to 13.1.3 (#156) ([3ac7fc9](https://github.com/readmeio/oas-normalize/commit/3ac7fc9)), closes [#156](https://github.com/readmeio/oas-normalize/issues/156)
+* chore(deps-dev): removing conventional-changelog-cli in favor of npx ([7c28a12](https://github.com/readmeio/oas-normalize/commit/7c28a12))
+* ci: ignoring node-fetch after v3 because its now an esm package ([3ea35aa](https://github.com/readmeio/oas-normalize/commit/3ea35aa))
+
+
+
 ## 4.0.0 (2021-08-26)
 
 > 🚨 &nbsp;**Breaking change!**
