@@ -39,7 +39,7 @@
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.0.3",
     "js-yaml": "^4.1.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.0.0",
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {
