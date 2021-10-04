@@ -1,3 +1,12 @@
+## <small>4.0.3 (2021-10-04)</small>
+
+* chore(deps-dev): bump jest from 27.2.0 to 27.2.4 (#158) ([e85bcc0](https://github.com/readmeio/oas-normalize/commit/e85bcc0)), closes [#158](https://github.com/readmeio/oas-normalize/issues/158)
+* chore(deps): bump actions/setup-node from 2.4.0 to 2.4.1 (#160) ([e81d942](https://github.com/readmeio/oas-normalize/commit/e81d942)), closes [#160](https://github.com/readmeio/oas-normalize/issues/160)
+* chore(deps): bump node-fetch from 2.6.1 to 2.6.5 (#159) ([2f0918a](https://github.com/readmeio/oas-normalize/commit/2f0918a)), closes [#159](https://github.com/readmeio/oas-normalize/issues/159)
+* docs: adding a code of conduct ([600c0ff](https://github.com/readmeio/oas-normalize/commit/600c0ff))
+
+
+
 ## <small>4.0.1 (2021-09-01)</small>
 
 * chore(deps-dev): bump @readme/eslint-config from 6.0.0 to 6.1.0 (#157) ([df79698](https://github.com/readmeio/oas-normalize/commit/df79698)), closes [#157](https://github.com/readmeio/oas-normalize/issues/157)
