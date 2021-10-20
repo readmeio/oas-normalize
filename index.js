@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 const converter = require('swagger2openapi');
-const swaggerParser = require('@apidevtools/swagger-parser');
+const openapiParser = require('@readme/openapi-parser');
 const utils = require('./lib/utils');
 
 class oasNormalize {
@@ -51,7 +51,7 @@ class oasNormalize {
     if (this.cache.bundle) return Promise.resolve(this.cache.bundle);
 
     return this.load()
-      .then(schema => swaggerParser.bundle(schema))
+      .then(schema => openapiParser.bundle(schema))
       .then(bundle => {
         this.cache.bundle = bundle;
         return bundle;
@@ -62,7 +62,7 @@ class oasNormalize {
     if (this.cache.deref) return Promise.resolve(this.cache.deref);
 
     return this.load()
-      .then(schema => swaggerParser.dereference(schema))
+      .then(schema => openapiParser.dereference(schema))
       .then(dereferenced => {
         this.cache.deref = dereferenced;
         return dereferenced;
@@ -76,14 +76,14 @@ class oasNormalize {
       if (baseVersion === 1) {
         return Promise.reject(new Error('Swagger v1.2 is unsupported.'));
       } else if (baseVersion === 2 || baseVersion === 3) {
-        // `swaggerParser.validate()` dereferences schemas at the same time as validation and does
+        // `openapiParser.validate()` dereferences schemas at the same time as validation and does
         // not give us an option to disable this. Since all we already have a dereferencing method
         // on this library and our `validate()` method here just needs to tell us if the definition
-        // is valid or not we need to clone it before passing it over to `swagger-parser` so as to
+        // is valid or not we need to clone it before passing it over to `openapi-parser` so as to
         // not run into pass-by-reference problems.
         const clonedSchema = JSON.parse(JSON.stringify(schema));
 
-        return swaggerParser
+        return openapiParser
           .validate(clonedSchema)
           .then(() => {
             if (!convertToLatest) {
