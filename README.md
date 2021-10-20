@@ -1,4 +1,4 @@
-OpenAPI 3 or Swagger 2? YAML or JSON? URL, path, string or object? Who cares! It just works.
+OpenAPI 3.x or Swagger 2.0? YAML or JSON? URL, path, string or object? Who cares! It just works.
 
 This module uses a bunch of other great modules to do the heavy lifting, and normalizes everything!
 
@@ -19,12 +19,16 @@ It's pretty simple:
 ```javascript
 const OASNormalize = require('oas-normalize');
 
-const oas = new OASNormalize('https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml'); // Or a string, pathname, JSON blob, whatever
+const oas = new OASNormalize(
+  // Or a string, pathname, JSON blob, whatever
+  'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml'
+);
 
 oas.validate().then(definition => {
-  console.log(definition); // definition will always be JSON, and valid
+  // Definition will always be JSON, and valid.
+  console.log(definition);
 }).catch(err => {
-  console.log(err.errors);
+  console.log(err);
 });
 ```
 
@@ -34,13 +38,16 @@ For validation errors, when available, you'll get back an object:
 
 ```json
 {
-  "errors": [
-    {
-      "message": "User-friendly message",
-      "path": [...array of the path to the error...]
-    }
-  ],
-  "full": ...raw errors...
+  "details": [
+    // Ajv pathing errors. For example:
+    /* {
+      "instancePath": "/components/securitySchemes/tlsAuth",
+      "schemaPath": "#/properties/securitySchemes/patternProperties/%5E%5Ba-zA-Z0-9%5C.%5C-_%5D%2B%24/oneOf",
+      "keyword": "oneOf",
+      "params": { "passingSchemas": null },
+      "message": "must match exactly one schema in oneOf"
+    }, */
+  ]
 }
 ```
 

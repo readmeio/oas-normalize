@@ -94,27 +94,7 @@ class oasNormalize {
               return options.openapi;
             });
           })
-          .catch(err => {
-            const error = new Error(err.message.replace(/\[object Object\]/g, 'Schema'));
-            error.full = err;
-
-            if (err.details && err.details.length) {
-              error.errors = [
-                {
-                  message: err.details[0].message,
-                  path: err.details[0].path,
-                },
-              ];
-            } else {
-              error.errors = [
-                {
-                  message: err.message.replace(/\[object Object\]/g, 'Schema'),
-                },
-              ];
-            }
-
-            return Promise.reject(error);
-          });
+          .catch(err => Promise.reject(err));
       }
 
       return Promise.reject(new Error('The supplied API definition is unsupported.'));

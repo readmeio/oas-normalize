@@ -150,16 +150,50 @@ describe('#validate', () => {
         title: 'Example OpenAPI base file for `oas`.',
         version: '1.0',
       },
-      servers: [
-        {
-          url: 'https://api.example.com',
+    };
+
+    const o = new OASNormalize(contents);
+    await expect(o.validate()).rejects.toThrow('Supplied schema is not a valid OpenAPI definition.');
+  });
+
+  it("should error out when a definition doesn't match the schema", async () => {
+    expect.hasAssertions();
+
+    const contents = {
+      openapi: '3.0.0',
+      info: {
+        version: '1.0.0',
+        title: 'Invalid API',
+      },
+      paths: {
+        '/': {
+          post: {
+            responses: {
+              200: {
+                description: 'OK',
+              },
+            },
+            security: [{ tlsAuth: [] }],
+          },
         },
-      ],
+      },
+      components: {
+        securitySchemes: {
+          tlsAuth: {
+            type: 'mutualTLS', // mutualTLS is only available on OpenAPI 3.1
+          },
+        },
+      },
     };
 
     const o = new OASNormalize(contents);
 
-    await expect(o.validate()).rejects.toThrow('Supplied schema is not a valid OpenAPI definition.');
+    await expect(o.validate()).rejects.toStrictEqual(
+      expect.objectContaining({
+        message: expect.stringContaining("REQUIRED must have required property 'openIdConnectUrl'"),
+        details: expect.any(Array),
+      })
+    );
   });
 
   describe.each([
