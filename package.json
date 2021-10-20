@@ -1,7 +1,7 @@
 {
   "name": "oas-normalize",
-  "version": "4.0.3",
-  "description": "OpenAPI 3 or Swagger 2? YAML or JSON? URL, path, string or object? Who cares! It just works.",
+  "version": "5.0.0",
+  "description": "OpenAPI 3.x or Swagger 2.0? YAML or JSON? URL, path, string or object? Who cares! It just works.",
   "main": "index.js",
   "engines": {
     "node": "^12 || ^14 || ^16"
@@ -32,7 +32,6 @@
     "lint": "eslint .",
     "pretest": "npm run lint",
     "prettier": "prettier --list-different --write \"./**/**.{js,jsx}\"",
-    "release": "npx conventional-changelog-cli -i CHANGELOG.md -s",
     "test": "jest --coverage"
   },
   "license": "MIT",
