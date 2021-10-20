@@ -7,7 +7,12 @@ const utils = require('./lib/utils');
 class oasNormalize {
   constructor(file, opts) {
     this.file = file;
-    this.opts = { enablePaths: false, ...opts };
+    this.opts = {
+      colorizeErrors: false,
+      enablePaths: false,
+      ...opts,
+    };
+
     this.type = utils.type(this.file);
 
     this.cache = {
@@ -69,7 +74,9 @@ class oasNormalize {
       });
   }
 
-  async validate(convertToLatest) {
+  async validate(convertToLatest = false) {
+    const colorizeErrors = this.opts.colorizeErrors;
+
     return this.load().then(async schema => {
       const baseVersion = parseInt(utils.version(schema), 10);
 
@@ -84,7 +91,11 @@ class oasNormalize {
         const clonedSchema = JSON.parse(JSON.stringify(schema));
 
         return openapiParser
-          .validate(clonedSchema)
+          .validate(clonedSchema, {
+            validate: {
+              colorizeErrors,
+            },
+          })
           .then(() => {
             if (!convertToLatest) {
               return schema;

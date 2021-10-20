@@ -83,3 +83,17 @@ For security reasons, you need to opt into allowing fetching by a local path. To
 ```js
 const oas = new OASNormalize('./petstore.json', { enablePaths: true })
 ```
+
+### Colorized errors
+
+If you wish errors from `.validate()` to be styled and colorized, supply `colorizeErrors: true` to your instance of `OASNormalize`:
+
+```js
+const oas = new OASNormalize('https://example.com/petstore.json', {
+  colorizeErrors: true,
+})
+```
+
+Error messages will look like such:
+
+<img src="https://user-images.githubusercontent.com/33762/137796648-7e1157c2-cee4-466e-9129-dd2a743dd163.png" width="600" />
