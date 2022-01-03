@@ -161,7 +161,7 @@ describe('#validate', () => {
 
     await expect(o.validate()).rejects.toStrictEqual(
       expect.objectContaining({
-        message: expect.stringContaining("REQUIRED must have required property 'openIdConnectUrl'"),
+        message: expect.stringContaining("REQUIRED must have required property 'name'"),
         details: expect.any(Array),
       })
     );
