@@ -36,18 +36,18 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@readme/openapi-parser": "^2.0.4",
+    "@readme/openapi-parser": "^2.1.0",
     "js-yaml": "^4.1.0",
     "node-fetch": "^2.6.1",
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {
     "@readme/eslint-config": "^8.5.1",
-    "@readme/oas-examples": "^4.4.0",
-    "eslint": "^8.11.0",
+    "@readme/oas-examples": "^5.0.0",
+    "eslint": "^8.12.0",
     "jest": "^27.5.1",
     "nock": "^13.2.4",
-    "prettier": "^2.6.0"
+    "prettier": "^2.6.1"
   },
   "prettier": "@readme/eslint-config/prettier"
 }
