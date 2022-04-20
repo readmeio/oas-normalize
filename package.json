@@ -4,7 +4,7 @@
   "description": "OpenAPI 3.x or Swagger 2.0? YAML or JSON? URL, path, string or object? Who cares! It just works.",
   "main": "index.js",
   "engines": {
-    "node": "^12 || ^14 || ^16 || ^17"
+    "node": ">=14"
   },
   "tags": [
     "api",
@@ -36,13 +36,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@readme/openapi-parser": "^2.1.1",
+    "@readme/openapi-parser": "^2.2.0",
     "js-yaml": "^4.1.0",
     "node-fetch": "^2.6.1",
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {
-    "@readme/eslint-config": "^8.6.0",
+    "@readme/eslint-config": "^8.7.0",
     "@readme/oas-examples": "^5.0.0",
     "eslint": "^8.12.0",
     "jest": "^27.5.1",
