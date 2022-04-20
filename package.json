@@ -43,11 +43,11 @@
   },
   "devDependencies": {
     "@readme/eslint-config": "^8.7.0",
-    "@readme/oas-examples": "^5.0.0",
-    "eslint": "^8.12.0",
+    "@readme/oas-examples": "^5.1.1",
+    "eslint": "^8.13.0",
     "jest": "^27.5.1",
     "nock": "^13.2.4",
-    "prettier": "^2.6.1"
+    "prettier": "^2.6.2"
   },
   "prettier": "@readme/eslint-config/prettier"
 }
