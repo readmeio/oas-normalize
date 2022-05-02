@@ -18,14 +18,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Node 14 still ships with npm@6 so for compatibility reasons we're upping
-      # this to match everything else.
-      - name: Install npm@8
-        if: matrix.node-version == '14'
-        run: npm install -g npm@8
-
-      - name: Install deps
-        run: npm ci
-
-      - name: Run tests
-        run: npm test
+      - run: npm ci
+      - run: npm test
