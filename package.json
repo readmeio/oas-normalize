@@ -42,7 +42,7 @@
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {
-    "@readme/eslint-config": "^8.7.0",
+    "@readme/eslint-config": "^9.0.0",
     "@readme/oas-examples": "^5.1.1",
     "eslint": "^8.13.0",
     "jest": "^28.0.3",
