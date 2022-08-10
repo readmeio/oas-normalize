@@ -61,12 +61,17 @@ For validation errors, when available, you'll get back an object:
 
 If you want some more functionality, you can do anything here:
 
+<!--
+Prettier's table formatting sucks, hence the ignore block below.
+-->
+<!-- prettier-ignore-start -->
 | Function | What it does |
 | :--- | :--- |
 | `.load()` | Just load the file, valid or not, as JSON |
 | `.bundle()` | Bring together all files into one JSON blob (but retain `$ref` pointers) |
 | `.deref()` | Resolve `$ref` pointers |
 | `.validate([convertToLatest?])` | Validate the whole thing! |
+<!-- prettier-ignore-end -->
 
 # Other Little Features
 
