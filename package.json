@@ -35,7 +35,8 @@
     "prebuild": "rm -rf dist/",
     "prepack": "npm run build",
     "pretest": "npm run lint",
-    "prettier": "prettier --list-different --write \"./**/**.{js,ts}\"",
+    "prettier": "prettier --list-different \"./**/**.{md,js,ts}\"",
+    "prettier:write": "prettier --list-different --write \"./**/**.{md,js,ts}\"",
     "test": "tsc; jest --coverage"
   },
   "license": "MIT",
