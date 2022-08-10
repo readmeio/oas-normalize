@@ -16,6 +16,7 @@ npm install oas-normalize --save
 
 ```javascript
 import OASNormalize from 'oas-normalize';
+// const { default: OASNormalize } = require('oas-normalize'); // If you're using CJS.
 
 const oas = new OASNormalize(
   // Or a string, pathname, JSON blob, whatever

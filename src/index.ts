@@ -21,7 +21,7 @@ export default class OASNormalize {
     load?: false | Record<string, unknown>;
   };
 
-  file: string;
+  file: any;
 
   opts: Options;
 
