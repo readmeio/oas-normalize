@@ -1,8 +1,12 @@
 /* eslint-disable import/no-dynamic-require, global-require */
-const fs = require('fs');
-const path = require('path');
-const nock = require('nock');
-const OASNormalize = require('..');
+import type { OpenAPIV3 } from 'openapi-types';
+
+import fs from 'fs';
+import path from 'path';
+
+import nock from 'nock';
+
+import OASNormalize from '../src';
 
 function cloneObject(obj) {
   return JSON.parse(JSON.stringify(obj));
@@ -23,7 +27,7 @@ describe('#load', () => {
     });
 
     it('should reject if unrecognized file supplied', async () => {
-      await expect(new OASNormalize().load()).rejects.toThrow('Could not load this file.');
+      await expect(new OASNormalize(cloneObject).load()).rejects.toThrow('Could not load this file.');
     });
 
     it('should support JSON objects', async () => {
@@ -82,19 +86,23 @@ describe('#load', () => {
 
 describe('#bundle', () => {
   it('should bundle an external schema in', async () => {
-    const petSchema = require('./__fixtures__/bundle/pet.json');
+    const petSchema = await import('./__fixtures__/bundle/pet.json').then(r => r.default);
     const contents = require.resolve('./__fixtures__/bundle/definition.json');
     const o = new OASNormalize(contents, { enablePaths: true });
-    const bundled = await o.bundle();
+    const bundled = (await o.bundle()) as OpenAPIV3.Document;
 
-    expect(bundled.components.requestBodies.Pet.content).toStrictEqual({
-      'application/json': {
-        schema: {
-          $ref: '#/components/requestBodies/Pet/content/application~1xml/schema',
+    expect(bundled.components?.requestBodies?.Pet).toStrictEqual({
+      description: 'Pet object that needs to be added to the store',
+      required: true,
+      content: {
+        'application/json': {
+          schema: {
+            $ref: '#/components/requestBodies/Pet/content/application~1xml/schema',
+          },
         },
-      },
-      'application/xml': {
-        schema: petSchema,
+        'application/xml': {
+          schema: petSchema,
+        },
       },
     });
   });
@@ -102,14 +110,15 @@ describe('#bundle', () => {
 
 describe('#deref', () => {
   it('should dereference a definition', async () => {
-    const openapi = require('@readme/oas-examples/3.0/json/petstore.json');
+    const openapi = await import('@readme/oas-examples/3.0/json/petstore.json').then(r => r.default);
     expect(openapi.paths['/pet'].post.requestBody).toStrictEqual({
       $ref: '#/components/requestBodies/Pet',
     });
 
     const o = new OASNormalize(cloneObject(openapi));
-    const deref = await o.deref();
-    expect(deref.paths['/pet'].post.requestBody).toStrictEqual({
+    const deref = (await o.deref()) as OpenAPIV3.Document;
+
+    expect(deref?.paths?.['/pet']?.post?.requestBody).toStrictEqual({
       description: 'Pet object that needs to be added to the store',
       required: true,
       content: {
@@ -122,7 +131,7 @@ describe('#deref', () => {
 
 describe('#validate', () => {
   it("should not convert a Swagger definition to OpenAPI if we don't want to", async () => {
-    const swagger = require('@readme/oas-examples/2.0/json/petstore.json');
+    const swagger = await import('@readme/oas-examples/2.0/json/petstore.json').then(r => r.default);
     const o = new OASNormalize(cloneObject(swagger));
 
     await expect(o.validate()).resolves.toStrictEqual(swagger);
@@ -184,7 +193,7 @@ describe('#validate', () => {
     ['OpenAPI 3.1', '3.1'],
   ])('%s support', (_, version) => {
     it('should validate a URL hosting JSON as expected', async () => {
-      const json = require(`@readme/oas-examples/${version}/json/petstore.json`);
+      const json = await import(`@readme/oas-examples/${version}/json/petstore.json`).then(r => r.default);
 
       const mock = nock('http://example.com').get(`/api-${version}.json`).reply(200, cloneObject(json));
       const o = new OASNormalize(`http://example.com/api-${version}.json`);
@@ -229,11 +238,11 @@ describe('#version', () => {
 
   it('should detect an OpenAPI definition', async () => {
     await expect(
-      new OASNormalize(require('@readme/oas-examples/3.0/json/petstore.json'), { enablePaths: true }).version()
+      new OASNormalize(require.resolve('@readme/oas-examples/3.0/json/petstore.json'), { enablePaths: true }).version()
     ).resolves.toBe('3.0.0');
 
     await expect(
-      new OASNormalize(require('@readme/oas-examples/3.1/json/petstore.json'), { enablePaths: true }).version()
+      new OASNormalize(require.resolve('@readme/oas-examples/3.1/json/petstore.json'), { enablePaths: true }).version()
     ).resolves.toBe('3.1.0');
   });
 });
