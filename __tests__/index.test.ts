@@ -176,6 +176,14 @@ describe('#validate', () => {
     );
   });
 
+  it('should error out, and show all errors, when a definition has lots of problems', async () => {
+    const o = new OASNormalize(require.resolve('./__fixtures__/invalid/openapi-very-invalid.json'), {
+      enablePaths: true,
+    });
+
+    await expect(o.validate()).rejects.toMatchSnapshot();
+  });
+
   // Skipping because the `chalk` dependency of `better-ajv-errors` within `openapi-parser` has
   // issues in CI. Test works fine locally though!
   it.skip('should colorize errors when `opts.colorizeErrors` is present', async () => {
