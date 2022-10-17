@@ -12815,3 +12815,27 @@ Object {
   ],
 }
 `;
+
+exports[`#validate should error out, and show all errors, when a definition has lots of problems 1`] = `
+[SyntaxError: OpenAPI schema validation failed.
+
+REQUIRED must have required property 'url'
+
+   7 |   },
+   8 |   "servers": [
+>  9 |     {
+     |     ^ ☹️  url is missing here!
+  10 |       "urll": "http://petstore.swagger.io/v2"
+  11 |     }
+  12 |   ],
+
+ADDITIONAL PROPERTY must NOT have additional properties
+
+  24 |     "/pet/findByStatus": {
+  25 |       "get": {
+> 26 |         "tagss": [
+     |         ^^^^^^^ 😲  tagss is not expected to be here!
+  27 |           "pet"
+  28 |         ],
+  29 |         "summary": "Finds Pets by status",]
+`;
