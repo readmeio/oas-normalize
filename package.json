@@ -1,6 +1,6 @@
 {
   "name": "oas-normalize",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "description": "OpenAPI 3.x or Swagger 2.0? YAML or JSON? URL, path, string or object? Who cares! It just works.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
