@@ -84,9 +84,11 @@ await oas.validate().then(definition => {
 
 #### Options
 
-| Option | Type | Description
+<!-- prettier-ignore-start -->
+| Option | Type | Description |
 | :--- | :--- | :--- |
 | `convertToLatest` | Boolean | By default `#validate` will not upconvert Swagger API definitions to OpenAPI so if you wish for this to happen, supply `true`. |
+<!-- prettier-ignore-end -->
 
 #### Error Handling
 
