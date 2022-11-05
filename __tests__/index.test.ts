@@ -233,7 +233,7 @@ describe('#validate', () => {
       const mock = nock('http://example.com').get(`/api-${version}.json`).reply(200, cloneObject(json));
       const o = new OASNormalize(`http://example.com/api-${version}.json`);
 
-      await expect(o.validate(true)).resolves.toMatchSnapshot();
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
       mock.done();
     });
 
@@ -242,7 +242,7 @@ describe('#validate', () => {
         enablePaths: true,
       });
 
-      await expect(o.validate(true)).resolves.toMatchSnapshot();
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
     });
 
     it('should validate a URL hosting YAML as expected', async () => {
@@ -250,7 +250,7 @@ describe('#validate', () => {
       const mock = nock('http://example.com').get(`/api-${version}.yaml`).reply(200, yaml);
       const o = new OASNormalize(`http://example.com/api-${version}.yaml`);
 
-      await expect(o.validate(true)).resolves.toMatchSnapshot();
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
       mock.done();
     });
 
@@ -259,7 +259,7 @@ describe('#validate', () => {
         enablePaths: true,
       });
 
-      await expect(o.validate(true)).resolves.toMatchSnapshot();
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
     });
   });
 
@@ -269,7 +269,7 @@ describe('#validate', () => {
         enablePaths: true,
       });
 
-      await expect(o.validate(true)).resolves.toMatchSnapshot();
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
     });
   });
 });

@@ -135,7 +135,8 @@ export default class OASNormalize {
    * Validate, and potentially convert to OpenAPI, a given API definition.
    *
    */
-  async validate(convertToLatest = false) {
+  async validate(opts: { convertToLatest?: boolean } = { convertToLatest: false }) {
+    const convertToLatest = opts.convertToLatest;
     const colorizeErrors = this.opts.colorizeErrors;
 
     return this.load()
