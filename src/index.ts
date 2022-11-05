@@ -4,6 +4,7 @@ import fs from 'fs';
 
 import openapiParser from '@readme/openapi-parser';
 import fetch from 'node-fetch';
+import postmanToOpenAPI from 'postman-to-openapi';
 
 import converter from 'swagger2openapi';
 
@@ -44,7 +45,9 @@ export default class OASNormalize {
     };
   }
 
-  // Internal API for the most part
+  /**
+   * @private
+   */
   async load() {
     if (this.cache.load) return Promise.resolve(this.cache.load);
 
@@ -82,14 +85,21 @@ export default class OASNormalize {
   }
 
   /**
-   * Bundle up the given OpenAPI or Swagger definition, resolving any external `$ref` pointers in
-   * the process.
+   * Bundle up the given API definition, resolving any external `$ref` pointers in the process.
    *
    */
   async bundle() {
     if (this.cache.bundle) return Promise.resolve(this.cache.bundle);
 
     return this.load()
+      .then(schema => {
+        // Postman collections don't support `$ref` pointers so there's nothing for us to bundle.
+        if (utils.isPostman(schema)) {
+          throw new Error('Postman collections cannot be bundled.');
+        }
+
+        return schema;
+      })
       .then(schema => openapiParser.bundle(schema))
       .then(bundle => {
         this.cache.bundle = bundle;
@@ -98,13 +108,22 @@ export default class OASNormalize {
   }
 
   /**
-   * Dereference the given OpenAPI or Swagger.
+   * Dereference the given API definition.
    *
    */
   async deref() {
     if (this.cache.deref) return Promise.resolve(this.cache.deref);
 
     return this.load()
+      .then(schema => {
+        // Postman collections don't support `$ref` pointers so there's nothing for us to
+        // dereference.
+        if (utils.isPostman(schema)) {
+          throw new Error('Postman collections cannot be dereferenced.');
+        }
+
+        return schema;
+      })
       .then(schema => openapiParser.dereference(schema))
       .then(dereferenced => {
         this.cache.deref = dereferenced;
@@ -113,19 +132,30 @@ export default class OASNormalize {
   }
 
   /**
-   * Validate a given OpenAPI or Swagger definition, potentially upconverting it from Swagger to
-   * OpenAPI in the process if you wish.
+   * Validate, and potentially convert to OpenAPI, a given API definition.
    *
    */
   async validate(convertToLatest = false) {
     const colorizeErrors = this.opts.colorizeErrors;
 
-    return this.load().then(async schema => {
-      const baseVersion = parseInt(utils.version(schema), 10);
+    return this.load()
+      .then(async schema => {
+        if (!utils.isPostman(schema)) {
+          return schema;
+        }
 
-      if (baseVersion === 1) {
-        return Promise.reject(new Error('Swagger v1.2 is unsupported.'));
-      } else if (baseVersion === 2 || baseVersion === 3) {
+        return postmanToOpenAPI(JSON.stringify(schema), null, { outputFormat: 'json' }).then(JSON.parse);
+      })
+      .then(async schema => {
+        if (!utils.isSwagger(schema) && !utils.isOpenAPI(schema)) {
+          return Promise.reject(new Error('The supplied API definition is unsupported.'));
+        } else if (utils.isSwagger(schema)) {
+          const baseVersion = parseInt(schema.swagger, 10);
+          if (baseVersion === 1) {
+            return Promise.reject(new Error('Swagger v1.2 is unsupported.'));
+          }
+        }
+
         /**
          * `openapiParser.validate()` dereferences schemas at the same time as validation and does
          * not give us an option to disable this. Since all we already have a dereferencing method
@@ -146,22 +176,11 @@ export default class OASNormalize {
               return schema;
             }
 
-            return converter.convertObj(schema, { anchors: true }).then((options: { openapi: OpenAPI.Document }) => {
-              return options.openapi;
-            });
+            return converter
+              .convertObj(schema, { anchors: true })
+              .then((options: { openapi: OpenAPI.Document }) => options.openapi);
           })
           .catch(err => Promise.reject(err));
-      }
-
-      return Promise.reject(new Error('The supplied API definition is unsupported.'));
-    });
-  }
-
-  /**
-   * Retrieve the OpenAPI or Swagger version of the current API definition.
-   *
-   */
-  version() {
-    return this.load().then(schema => utils.version(schema));
+      });
   }
 }

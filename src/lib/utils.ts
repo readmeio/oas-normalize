@@ -3,7 +3,7 @@ import type { OpenAPIV2, OpenAPIV3, OpenAPIV3_1 } from 'openapi-types';
 import YAML from 'js-yaml';
 
 /**
- * Retrieve the Swagger or OpenAPI version that a given Swagger or OpenAPI definition are targeting.
+ * Retrieve the Swagger or OpenAPI version that a given API definition is targeting.
  *
  */
 export function version(schema: OpenAPIV2.Document & OpenAPIV3.Document & OpenAPIV3_1.Document) {
@@ -21,20 +21,6 @@ export function isBuffer(obj: any) {
     typeof obj.constructor.isBuffer === 'function' &&
     obj.constructor.isBuffer(obj)
   );
-}
-
-/**
- * Convert a YAML blob or stringified JSON object into a JSON object.
- *
- */
-export function stringToJSON(string: string | Record<string, unknown>) {
-  if (typeof string === 'object') {
-    return string;
-  } else if (string.match(/^\s*{/)) {
-    return JSON.parse(string);
-  }
-
-  return YAML.load(string);
 }
 
 /**
@@ -60,4 +46,49 @@ export function getType(obj: any) {
   }
 
   return false;
+}
+
+/**
+ * Determine if a given schema if an OpenAPI definition.
+ *
+ */
+export function isOpenAPI(schema: Record<string, unknown>) {
+  return !!schema.openapi;
+}
+
+/**
+ * Determine if a given schema is a Postman collection.
+ *
+ * Unfortunately the Postman schema spec doesn't have anything like `openapi` or `swagger` for us
+ * to look at but it does require that `info` and `item` be present and as `item` doesn't exist in
+ * OpenAPI or Swagger we can use the combination of those two properties to determine if what we
+ * have is a Postman collection.
+ *
+ * @see {@link https://schema.postman.com/json/collection/v2.0.0/collection.json}
+ * @see {@link https://schema.postman.com/json/collection/v2.1.0/collection.json}
+ */
+export function isPostman(schema: Record<string, unknown>): boolean {
+  return !!schema.info && !!schema.item;
+}
+
+/**
+ * Determine if a given schema if an Swagger definition.
+ *
+ */
+export function isSwagger(schema: Record<string, unknown>) {
+  return !!schema.swagger;
+}
+
+/**
+ * Convert a YAML blob or stringified JSON object into a JSON object.
+ *
+ */
+export function stringToJSON(string: string | Record<string, unknown>) {
+  if (typeof string === 'object') {
+    return string;
+  } else if (string.match(/^\s*{/)) {
+    return JSON.parse(string);
+  }
+
+  return YAML.load(string);
 }

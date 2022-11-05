@@ -1,4 +1,3 @@
-/* eslint-disable import/no-dynamic-require, global-require */
 import type { OpenAPIV3 } from 'openapi-types';
 
 import fs from 'fs';
@@ -7,6 +6,7 @@ import path from 'path';
 import nock from 'nock';
 
 import OASNormalize from '../src';
+import { isOpenAPI, isPostman, isSwagger } from '../src/lib/utils';
 
 function cloneObject(obj) {
   return JSON.parse(JSON.stringify(obj));
@@ -21,8 +21,8 @@ describe('#load', () => {
     let json;
     let yaml;
 
-    beforeEach(() => {
-      json = require(`@readme/oas-examples/${version}/json/petstore.json`);
+    beforeEach(async () => {
+      json = await import(`@readme/oas-examples/${version}/json/petstore.json`).then(r => r.default);
       yaml = require.resolve(`@readme/oas-examples/${version}/yaml/petstore.yaml`);
     });
 
@@ -82,6 +82,21 @@ describe('#load', () => {
       });
     });
   });
+
+  describe('Postman support', () => {
+    it('should be able to load a Postman collection', async () => {
+      const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+      const o = new OASNormalize(postman);
+      await expect(o.load()).resolves.toStrictEqual(
+        expect.objectContaining({
+          info: expect.objectContaining({
+            // eslint-disable-next-line camelcase
+            _postman_id: '0b2e8577-2899-4229-bb1c-4cb031108c2f',
+          }),
+        })
+      );
+    });
+  });
 });
 
 describe('#bundle', () => {
@@ -106,6 +121,12 @@ describe('#bundle', () => {
       },
     });
   });
+
+  it('should throw an error if supplied a Postman collection', async () => {
+    const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+    const o = new OASNormalize(postman);
+    await expect(o.bundle()).rejects.toThrow('Postman collections cannot be bundled.');
+  });
 });
 
 describe('#deref', () => {
@@ -126,6 +147,12 @@ describe('#deref', () => {
         'application/xml': expect.any(Object),
       },
     });
+  });
+
+  it('should throw an error if supplied a Postman collection', async () => {
+    const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+    const o = new OASNormalize(postman);
+    await expect(o.deref()).rejects.toThrow('Postman collections cannot be dereferenced.');
   });
 });
 
@@ -235,22 +262,68 @@ describe('#validate', () => {
       await expect(o.validate(true)).resolves.toMatchSnapshot();
     });
   });
+
+  describe('Postman support', () => {
+    it('should support converting a Postman collection to OpenAPI (validating it in the process)', async () => {
+      const o = new OASNormalize(require.resolve('./__fixtures__/postman/petstore.collection.json'), {
+        enablePaths: true,
+      });
+
+      await expect(o.validate(true)).resolves.toMatchSnapshot();
+    });
+  });
 });
 
-describe('#version', () => {
-  it('should detect a Swagger definition', async () => {
-    await expect(
-      new OASNormalize(require.resolve('@readme/oas-examples/2.0/json/petstore.json'), { enablePaths: true }).version()
-    ).resolves.toBe('2.0');
+describe('#utils', () => {
+  let openapi;
+  let postman;
+  let swagger;
+
+  beforeAll(async () => {
+    openapi = await import(require.resolve('@readme/oas-examples/3.0/json/petstore.json')).then(r => r.default);
+    postman = await import(require.resolve('./__fixtures__/postman/petstore.collection.json')).then(r => r.default);
+    swagger = await import(require.resolve('@readme/oas-examples/2.0/json/petstore.json')).then(r => r.default);
   });
 
-  it('should detect an OpenAPI definition', async () => {
-    await expect(
-      new OASNormalize(require.resolve('@readme/oas-examples/3.0/json/petstore.json'), { enablePaths: true }).version()
-    ).resolves.toBe('3.0.0');
+  describe('#isOpenAPI', () => {
+    it('should identify an OpenAPI definition', () => {
+      expect(isOpenAPI(openapi)).toBe(true);
+    });
 
-    await expect(
-      new OASNormalize(require.resolve('@readme/oas-examples/3.1/json/petstore.json'), { enablePaths: true }).version()
-    ).resolves.toBe('3.1.0');
+    it('should not misidentify a Swagger definition', () => {
+      expect(isOpenAPI(swagger)).toBe(false);
+    });
+
+    it('should not misidentify a Postman collection', () => {
+      expect(isOpenAPI(postman)).toBe(false);
+    });
+  });
+
+  describe('#isPostman', () => {
+    it('should identify a Postman collection', () => {
+      expect(isPostman(postman)).toBe(true);
+    });
+
+    it('should not misidentify a Swagger definition', () => {
+      expect(isPostman(swagger)).toBe(false);
+    });
+
+    it('should not misidentify an OpenAPI', () => {
+      expect(isPostman(openapi)).toBe(false);
+    });
+  });
+
+  describe('#isSwagger', () => {
+    it('should identify a Swagger definition', () => {
+      expect(isSwagger(swagger)).toBe(true);
+    });
+
+    it('should not misidentify an OpenAPI definition', () => {
+      expect(isSwagger(openapi)).toBe(false);
+    });
+
+    it('should not misidentify a Postman collection', () => {
+      expect(isSwagger(postman)).toBe(false);
+    });
   });
 });
