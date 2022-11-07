@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://npm.im/oas-normalize">
-    <img src="https://user-images.githubusercontent.com/33762/200143162-237bb893-3cda-40d6-a1f6-edd5b8f978db.png" alt="oas-normalize" />
+    <img src="https://raw.githubusercontent.com/readmeio/oas-normalize/feat/postman-support/docs/logo.png" alt="oas-normalize" />
   </a>
 </p>
 
