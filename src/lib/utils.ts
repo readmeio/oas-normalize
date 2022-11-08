@@ -1,14 +1,4 @@
-import type { OpenAPIV2, OpenAPIV3, OpenAPIV3_1 } from 'openapi-types';
-
 import YAML from 'js-yaml';
-
-/**
- * Retrieve the Swagger or OpenAPI version that a given API definition is targeting.
- *
- */
-export function version(schema: OpenAPIV2.Document & OpenAPIV3.Document & OpenAPIV3_1.Document) {
-  return schema.swagger || schema.openapi;
-}
 
 /**
  * Determine if a given variable is a `Buffer`.
@@ -91,4 +81,28 @@ export function stringToJSON(string: string | Record<string, unknown>) {
   }
 
   return YAML.load(string);
+}
+
+/**
+ * Determine if a given schema is an API definition that we can support.
+ *
+ */
+export function isAPIDefinition(schema: Record<string, unknown>) {
+  return isOpenAPI(schema) || isPostman(schema) || isSwagger(schema);
+}
+
+/**
+ * Retrieve the tyep of API definition that a given schema is.
+ *
+ */
+export function getAPIDefinitionType(schema: Record<string, unknown>) {
+  if (isOpenAPI(schema)) {
+    return 'openapi';
+  } else if (isPostman(schema)) {
+    return 'postman';
+  } else if (isSwagger(schema)) {
+    return 'swagger';
+  }
+
+  return 'unknown';
 }

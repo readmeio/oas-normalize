@@ -15,6 +15,9 @@ export type Options = {
   enablePaths?: boolean;
 };
 
+export const isAPIDefinition = utils.isAPIDefinition;
+export const getAPIDefinitionType = utils.getAPIDefinitionType;
+
 export default class OASNormalize {
   cache: {
     bundle?: false | OpenAPI.Document;
@@ -93,9 +96,11 @@ export default class OASNormalize {
 
     return this.load()
       .then(schema => {
-        // Postman collections don't support `$ref` pointers so there's nothing for us to bundle.
+        // Though Postman collections don't support `$ref` pointers for us to bundle we'll still
+        // upconvert it to an OpenAPI definition file so our returned dataset is always one of
+        // those for a Postman dataset.
         if (utils.isPostman(schema)) {
-          throw new Error('Postman collections cannot be bundled.');
+          return postmanToOpenAPI(JSON.stringify(schema), null, { outputFormat: 'json' }).then(JSON.parse);
         }
 
         return schema;
@@ -116,10 +121,11 @@ export default class OASNormalize {
 
     return this.load()
       .then(schema => {
-        // Postman collections don't support `$ref` pointers so there's nothing for us to
-        // dereference.
+        // Though Postman collections don't support `$ref` pointers for us to dereference we'll
+        // still upconvert it to an OpenAPI definition file so our returned dataset is always one
+        // of those for a Postman dataset.
         if (utils.isPostman(schema)) {
-          throw new Error('Postman collections cannot be dereferenced.');
+          return postmanToOpenAPI(JSON.stringify(schema), null, { outputFormat: 'json' }).then(JSON.parse);
         }
 
         return schema;

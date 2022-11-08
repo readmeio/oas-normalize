@@ -5,7 +5,7 @@ import path from 'path';
 
 import nock from 'nock';
 
-import OASNormalize from '../src';
+import OASNormalize, { getAPIDefinitionType, isAPIDefinition } from '../src';
 import { isOpenAPI, isPostman, isSwagger } from '../src/lib/utils';
 
 function cloneObject(obj) {
@@ -122,10 +122,21 @@ describe('#bundle', () => {
     });
   });
 
-  it('should throw an error if supplied a Postman collection', async () => {
-    const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
-    const o = new OASNormalize(postman);
-    await expect(o.bundle()).rejects.toThrow('Postman collections cannot be bundled.');
+  describe('Postman support', () => {
+    it('should convert a Postman collection if supplied', async () => {
+      const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+      const o = new OASNormalize(postman);
+      const bundled = (await o.bundle()) as OpenAPIV3.Document;
+
+      // There's nothing to bundle in a Postman collection so we're really just testing here if it
+      // was properly converted to an OpenAPI definition.
+      expect(bundled.components).toStrictEqual({
+        securitySchemes: {
+          apikeyAuth: { type: 'http', scheme: 'apikey' },
+          oauth2Auth: { type: 'http', scheme: 'oauth2' },
+        },
+      });
+    });
   });
 });
 
@@ -149,10 +160,26 @@ describe('#deref', () => {
     });
   });
 
-  it('should throw an error if supplied a Postman collection', async () => {
-    const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
-    const o = new OASNormalize(postman);
-    await expect(o.deref()).rejects.toThrow('Postman collections cannot be dereferenced.');
+  describe('Postman support', () => {
+    it('should convert a Postman collection if supplied', async () => {
+      const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+
+      const o = new OASNormalize(postman);
+      const deref = (await o.deref()) as OpenAPIV3.Document;
+
+      expect(deref?.paths?.['/pet']?.post?.requestBody).toStrictEqual({
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              example: expect.objectContaining({
+                name: 'doggie',
+              }),
+            },
+          },
+        },
+      });
+    });
   });
 });
 
@@ -280,9 +307,33 @@ describe('#utils', () => {
   let swagger;
 
   beforeAll(async () => {
-    openapi = await import(require.resolve('@readme/oas-examples/3.0/json/petstore.json')).then(r => r.default);
-    postman = await import(require.resolve('./__fixtures__/postman/petstore.collection.json')).then(r => r.default);
-    swagger = await import(require.resolve('@readme/oas-examples/2.0/json/petstore.json')).then(r => r.default);
+    openapi = await import('@readme/oas-examples/3.0/json/petstore.json').then(r => r.default);
+    postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+    swagger = await import('@readme/oas-examples/2.0/json/petstore.json').then(r => r.default);
+  });
+
+  describe('#isAPIDefinition / #getAPIDefinitionType', () => {
+    it('should identify an OpenAPI definition', () => {
+      expect(isAPIDefinition(openapi)).toBe(true);
+      expect(getAPIDefinitionType(openapi)).toBe('openapi');
+    });
+
+    it('should identify a Postman definition', () => {
+      expect(isAPIDefinition(postman)).toBe(true);
+      expect(getAPIDefinitionType(postman)).toBe('postman');
+    });
+
+    it('should identify a Swagger definition', () => {
+      expect(isAPIDefinition(swagger)).toBe(true);
+      expect(getAPIDefinitionType(swagger)).toBe('swagger');
+    });
+
+    it('should not identify a non-API definition as one', async () => {
+      const pkg = await import('../package.json').then(r => r.default);
+
+      expect(isAPIDefinition(pkg)).toBe(false);
+      expect(getAPIDefinitionType(pkg)).toBe('unknown');
+    });
   });
 
   describe('#isOpenAPI', () => {
