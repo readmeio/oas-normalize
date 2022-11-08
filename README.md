@@ -47,7 +47,7 @@ oas
 
 > **Note**
 >
-> This method does not support Postman collections.
+> Because Postman collections don't support `$ref` pointers, this method will automatically upconvert a Postman collection to OpenAPI if supplied one.
 
 Bundle up the given API definition, resolving any external `$ref` pointers in the process.
 
@@ -61,7 +61,7 @@ await oas.bundle().then(definition => {
 
 > **Note**
 >
-> This method does not support Postman collections.
+> Because Postman collections don't support `$ref` pointers, this method will automatically upconvert a Postman collection to OpenAPI if supplied one.
 
 Dereference the given API definition, resolving all `$ref` pointers in the process.
 
