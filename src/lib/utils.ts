@@ -92,7 +92,7 @@ export function isAPIDefinition(schema: Record<string, unknown>) {
 }
 
 /**
- * Retrieve the tyep of API definition that a given schema is.
+ * Retrieve the type of API definition that a given schema is.
  *
  */
 export function getAPIDefinitionType(schema: Record<string, unknown>) {
