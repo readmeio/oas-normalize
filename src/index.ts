@@ -215,7 +215,7 @@ export default class OASNormalize {
           let version = 'unknown';
           if (schema?.info?.schema) {
             const match = schema.info.schema.match(
-              /http(s?):\/\/schema.getpostman.com\/json\/collection\/v([0-9.]+)\/collection.json/
+              /http(s?):\/\/schema.getpostman.com\/json\/collection\/v([0-9.]+)\//
             );
 
             if (match) {
