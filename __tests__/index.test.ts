@@ -301,6 +301,44 @@ describe('#validate', () => {
   });
 });
 
+describe('#version', () => {
+  it('should detect an OpenAPI definition', async () => {
+    await expect(
+      new OASNormalize(require.resolve('@readme/oas-examples/3.0/json/petstore.json'), { enablePaths: true }).version()
+    ).resolves.toStrictEqual({
+      specification: 'openapi',
+      version: '3.0.0',
+    });
+
+    await expect(
+      new OASNormalize(require.resolve('@readme/oas-examples/3.1/json/petstore.json'), { enablePaths: true }).version()
+    ).resolves.toStrictEqual({
+      specification: 'openapi',
+      version: '3.1.0',
+    });
+  });
+
+  it('should detect a Postman collection', async () => {
+    await expect(
+      new OASNormalize(require.resolve('@readme/oas-examples/2.0/json/petstore.json'), { enablePaths: true }).version()
+    ).resolves.toStrictEqual({
+      specification: 'swagger',
+      version: '2.0',
+    });
+  });
+
+  it('should detect a Swagger definition', async () => {
+    await expect(
+      new OASNormalize(require.resolve('./__fixtures__/postman/petstore.collection.json'), {
+        enablePaths: true,
+      }).version()
+    ).resolves.toStrictEqual({
+      specification: 'postman',
+      version: 'unknown',
+    });
+  });
+});
+
 describe('#utils', () => {
   let openapi;
   let postman;
