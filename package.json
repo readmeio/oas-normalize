@@ -9,18 +9,19 @@
   },
   "keywords": [
     "api",
+    "apidoc",
     "apis",
-    "openapi",
-    "swagger",
-    "openapi initiative",
-    "openapi specification",
-    "openapi spec",
-    "openapi document",
+    "documentation",
+    "microservice",
+    "postman",
     "oai",
     "oas",
-    "apidoc",
-    "microservice",
-    "documentation"
+    "openapi",
+    "openapi document",
+    "openapi initiative",
+    "openapi spec",
+    "openapi specification",
+    "swagger"
   ],
   "repository": {
     "type": "git",
