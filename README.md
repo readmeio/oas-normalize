@@ -95,7 +95,7 @@ await oas.validate().then(definition => {
 
 For validation errors, when available, you'll get back an object:
 
-```json
+```js
 {
   "details": [
     // Ajv pathing errors. For example:
