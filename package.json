@@ -1,26 +1,27 @@
 {
   "name": "oas-normalize",
   "version": "7.1.1",
-  "description": "OpenAPI 3.x or Swagger 2.0? YAML or JSON? URL, path, string or object? Who cares! It just works.",
+  "description": "Tooling for converting, valiating, and parsing OpenAPI, Swagger, and Postman API definitions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
     "node": ">=14"
   },
-  "tags": [
+  "keywords": [
     "api",
+    "apidoc",
     "apis",
-    "openapi",
-    "swagger",
-    "openapi initiative",
-    "openapi specification",
-    "openapi spec",
-    "openapi document",
+    "documentation",
+    "microservice",
+    "postman",
     "oai",
     "oas",
-    "apidoc",
-    "microservice",
-    "documentation"
+    "openapi",
+    "openapi document",
+    "openapi initiative",
+    "openapi spec",
+    "openapi specification",
+    "swagger"
   ],
   "repository": {
     "type": "git",
@@ -45,6 +46,7 @@
     "js-yaml": "^4.1.0",
     "node-fetch": "^2.6.1",
     "openapi-types": "^12.0.0",
+    "postman-to-openapi": "^2.7.1",
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {

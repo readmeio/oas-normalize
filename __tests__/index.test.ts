@@ -1,4 +1,3 @@
-/* eslint-disable import/no-dynamic-require, global-require */
 import type { OpenAPIV3 } from 'openapi-types';
 
 import fs from 'fs';
@@ -6,7 +5,8 @@ import path from 'path';
 
 import nock from 'nock';
 
-import OASNormalize from '../src';
+import OASNormalize, { getAPIDefinitionType, isAPIDefinition } from '../src';
+import { isOpenAPI, isPostman, isSwagger } from '../src/lib/utils';
 
 function cloneObject(obj) {
   return JSON.parse(JSON.stringify(obj));
@@ -21,8 +21,8 @@ describe('#load', () => {
     let json;
     let yaml;
 
-    beforeEach(() => {
-      json = require(`@readme/oas-examples/${version}/json/petstore.json`);
+    beforeEach(async () => {
+      json = await import(`@readme/oas-examples/${version}/json/petstore.json`).then(r => r.default);
       yaml = require.resolve(`@readme/oas-examples/${version}/yaml/petstore.yaml`);
     });
 
@@ -82,6 +82,21 @@ describe('#load', () => {
       });
     });
   });
+
+  describe('Postman support', () => {
+    it('should be able to load a Postman collection', async () => {
+      const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+      const o = new OASNormalize(postman);
+      await expect(o.load()).resolves.toStrictEqual(
+        expect.objectContaining({
+          info: expect.objectContaining({
+            // eslint-disable-next-line camelcase
+            _postman_id: '0b2e8577-2899-4229-bb1c-4cb031108c2f',
+          }),
+        })
+      );
+    });
+  });
 });
 
 describe('#bundle', () => {
@@ -106,6 +121,23 @@ describe('#bundle', () => {
       },
     });
   });
+
+  describe('Postman support', () => {
+    it('should convert a Postman collection if supplied', async () => {
+      const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+      const o = new OASNormalize(postman);
+      const bundled = (await o.bundle()) as OpenAPIV3.Document;
+
+      // There's nothing to bundle in a Postman collection so we're really just testing here if it
+      // was properly converted to an OpenAPI definition.
+      expect(bundled.components).toStrictEqual({
+        securitySchemes: {
+          apikeyAuth: { type: 'http', scheme: 'apikey' },
+          oauth2Auth: { type: 'http', scheme: 'oauth2' },
+        },
+      });
+    });
+  });
 });
 
 describe('#deref', () => {
@@ -125,6 +157,28 @@ describe('#deref', () => {
         'application/json': expect.any(Object),
         'application/xml': expect.any(Object),
       },
+    });
+  });
+
+  describe('Postman support', () => {
+    it('should convert a Postman collection if supplied', async () => {
+      const postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+
+      const o = new OASNormalize(postman);
+      const deref = (await o.deref()) as OpenAPIV3.Document;
+
+      expect(deref?.paths?.['/pet']?.post?.requestBody).toStrictEqual({
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              example: expect.objectContaining({
+                name: 'doggie',
+              }),
+            },
+          },
+        },
+      });
     });
   });
 });
@@ -206,7 +260,7 @@ describe('#validate', () => {
       const mock = nock('http://example.com').get(`/api-${version}.json`).reply(200, cloneObject(json));
       const o = new OASNormalize(`http://example.com/api-${version}.json`);
 
-      await expect(o.validate(true)).resolves.toMatchSnapshot();
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
       mock.done();
     });
 
@@ -215,7 +269,7 @@ describe('#validate', () => {
         enablePaths: true,
       });
 
-      await expect(o.validate(true)).resolves.toMatchSnapshot();
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
     });
 
     it('should validate a URL hosting YAML as expected', async () => {
@@ -223,7 +277,7 @@ describe('#validate', () => {
       const mock = nock('http://example.com').get(`/api-${version}.yaml`).reply(200, yaml);
       const o = new OASNormalize(`http://example.com/api-${version}.yaml`);
 
-      await expect(o.validate(true)).resolves.toMatchSnapshot();
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
       mock.done();
     });
 
@@ -232,25 +286,95 @@ describe('#validate', () => {
         enablePaths: true,
       });
 
-      await expect(o.validate(true)).resolves.toMatchSnapshot();
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
+    });
+  });
+
+  describe('Postman support', () => {
+    it('should support converting a Postman collection to OpenAPI (validating it in the process)', async () => {
+      const o = new OASNormalize(require.resolve('./__fixtures__/postman/petstore.collection.json'), {
+        enablePaths: true,
+      });
+
+      await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
     });
   });
 });
 
-describe('#version', () => {
-  it('should detect a Swagger definition', async () => {
-    await expect(
-      new OASNormalize(require.resolve('@readme/oas-examples/2.0/json/petstore.json'), { enablePaths: true }).version()
-    ).resolves.toBe('2.0');
+describe('#utils', () => {
+  let openapi;
+  let postman;
+  let swagger;
+
+  beforeAll(async () => {
+    openapi = await import('@readme/oas-examples/3.0/json/petstore.json').then(r => r.default);
+    postman = await import('./__fixtures__/postman/petstore.collection.json').then(r => r.default);
+    swagger = await import('@readme/oas-examples/2.0/json/petstore.json').then(r => r.default);
   });
 
-  it('should detect an OpenAPI definition', async () => {
-    await expect(
-      new OASNormalize(require.resolve('@readme/oas-examples/3.0/json/petstore.json'), { enablePaths: true }).version()
-    ).resolves.toBe('3.0.0');
+  describe('#isAPIDefinition / #getAPIDefinitionType', () => {
+    it('should identify an OpenAPI definition', () => {
+      expect(isAPIDefinition(openapi)).toBe(true);
+      expect(getAPIDefinitionType(openapi)).toBe('openapi');
+    });
 
-    await expect(
-      new OASNormalize(require.resolve('@readme/oas-examples/3.1/json/petstore.json'), { enablePaths: true }).version()
-    ).resolves.toBe('3.1.0');
+    it('should identify a Postman definition', () => {
+      expect(isAPIDefinition(postman)).toBe(true);
+      expect(getAPIDefinitionType(postman)).toBe('postman');
+    });
+
+    it('should identify a Swagger definition', () => {
+      expect(isAPIDefinition(swagger)).toBe(true);
+      expect(getAPIDefinitionType(swagger)).toBe('swagger');
+    });
+
+    it('should not identify a non-API definition as one', async () => {
+      const pkg = await import('../package.json').then(r => r.default);
+
+      expect(isAPIDefinition(pkg)).toBe(false);
+      expect(getAPIDefinitionType(pkg)).toBe('unknown');
+    });
+  });
+
+  describe('#isOpenAPI', () => {
+    it('should identify an OpenAPI definition', () => {
+      expect(isOpenAPI(openapi)).toBe(true);
+    });
+
+    it('should not misidentify a Swagger definition', () => {
+      expect(isOpenAPI(swagger)).toBe(false);
+    });
+
+    it('should not misidentify a Postman collection', () => {
+      expect(isOpenAPI(postman)).toBe(false);
+    });
+  });
+
+  describe('#isPostman', () => {
+    it('should identify a Postman collection', () => {
+      expect(isPostman(postman)).toBe(true);
+    });
+
+    it('should not misidentify a Swagger definition', () => {
+      expect(isPostman(swagger)).toBe(false);
+    });
+
+    it('should not misidentify an OpenAPI', () => {
+      expect(isPostman(openapi)).toBe(false);
+    });
+  });
+
+  describe('#isSwagger', () => {
+    it('should identify a Swagger definition', () => {
+      expect(isSwagger(swagger)).toBe(true);
+    });
+
+    it('should not misidentify an OpenAPI definition', () => {
+      expect(isSwagger(openapi)).toBe(false);
+    });
+
+    it('should not misidentify a Postman collection', () => {
+      expect(isSwagger(postman)).toBe(false);
+    });
   });
 });
