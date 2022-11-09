@@ -147,10 +147,16 @@ export default class OASNormalize {
        * Automatically convert the supplied API definition to the latest version of OpenAPI.
        */
       convertToLatest?: boolean;
+      parser?: openapiParser.Options;
     } = { convertToLatest: false }
   ) {
     const convertToLatest = opts.convertToLatest;
-    const colorizeErrors = this.opts.colorizeErrors;
+    const parserOptions = opts.parser || {};
+    if (!parserOptions.validate) {
+      parserOptions.validate = {};
+    }
+
+    parserOptions.validate.colorizeErrors = this.opts.colorizeErrors;
 
     return this.load()
       .then(async schema => {
@@ -180,11 +186,7 @@ export default class OASNormalize {
         const clonedSchema = JSON.parse(JSON.stringify(schema));
 
         return openapiParser
-          .validate(clonedSchema, {
-            validate: {
-              colorizeErrors,
-            },
-          })
+          .validate(clonedSchema, parserOptions)
           .then(() => {
             if (!convertToLatest) {
               return schema;
