@@ -112,6 +112,17 @@ For validation errors, when available, you'll get back an object:
 
 `message` is almost always there, but `path` is less dependable.
 
+### `#version()`
+
+Load and retrieve version information about a supplied API definition.
+
+```js
+await oas.version().then(({ specification, version }) => {
+  console.log(specification); // openapi
+  console.log(version); // 3.1.0
+});
+```
+
 ### Options
 
 ##### Enable local paths

@@ -141,7 +141,14 @@ export default class OASNormalize {
    * Validate, and potentially convert to OpenAPI, a given API definition.
    *
    */
-  async validate(opts: { convertToLatest?: boolean } = { convertToLatest: false }) {
+  async validate(
+    opts: {
+      /**
+       * Automatically convert the supplied API definition to the latest version of OpenAPI.
+       */
+      convertToLatest?: boolean;
+    } = { convertToLatest: false }
+  ) {
     const convertToLatest = opts.convertToLatest;
     const colorizeErrors = this.opts.colorizeErrors;
 
@@ -189,5 +196,37 @@ export default class OASNormalize {
           })
           .catch(err => Promise.reject(err));
       });
+  }
+
+  /**
+   * Retrieve OpenAPI, Swagger, or Postman version information about the supplied API definition.
+   *
+   */
+  version() {
+    return this.load().then(schema => {
+      switch (getAPIDefinitionType(schema)) {
+        case 'openapi':
+          return {
+            specification: 'openapi',
+            version: schema.openapi,
+          };
+
+        case 'postman':
+          // We don't have any way right now to know if a Postman collection is for v2.0 or v2.1.
+          return {
+            specification: 'postman',
+            version: 'unknown',
+          };
+
+        case 'swagger':
+          return {
+            specification: 'swagger',
+            version: schema.swagger,
+          };
+
+        default:
+          throw new Error('Unknown file detected.');
+      }
+    });
   }
 }
