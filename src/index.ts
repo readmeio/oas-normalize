@@ -214,6 +214,9 @@ export default class OASNormalize {
         case 'postman':
           let version = 'unknown';
           if (schema?.info?.schema) {
+            // Though `info.schema` is required by the Postman spec there's no strictness to its
+            // contents so we'll do our best to extract a version out of this schema URL that they
+            // seem to usually match. If not we'll fallback to treating it as an `unknown` version.
             const match = schema.info.schema.match(
               /http(s?):\/\/schema.getpostman.com\/json\/collection\/v([0-9.]+)\//
             );
