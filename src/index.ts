@@ -212,10 +212,20 @@ export default class OASNormalize {
           };
 
         case 'postman':
-          // We don't have any way right now to know if a Postman collection is for v2.0 or v2.1.
+          let version = 'unknown';
+          if (schema?.info?.schema) {
+            const match = schema.info.schema.match(
+              /http(s?):\/\/schema.getpostman.com\/json\/collection\/v([0-9.]+)\//
+            );
+
+            if (match) {
+              version = match[2];
+            }
+          }
+
           return {
             specification: 'postman',
-            version: 'unknown',
+            version,
           };
 
         case 'swagger':
