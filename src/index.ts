@@ -88,6 +88,13 @@ export default class OASNormalize {
   }
 
   /**
+   * @private
+   */
+  static convertPostmanToOpenAPI(schema: any) {
+    return postmanToOpenAPI(JSON.stringify(schema), null, { outputFormat: 'json', replaceVars: true }).then(JSON.parse);
+  }
+
+  /**
    * Bundle up the given API definition, resolving any external `$ref` pointers in the process.
    *
    */
@@ -100,7 +107,7 @@ export default class OASNormalize {
         // upconvert it to an OpenAPI definition file so our returned dataset is always one of
         // those for a Postman dataset.
         if (utils.isPostman(schema)) {
-          return postmanToOpenAPI(JSON.stringify(schema), null, { outputFormat: 'json' }).then(JSON.parse);
+          return OASNormalize.convertPostmanToOpenAPI(schema);
         }
 
         return schema;
@@ -125,7 +132,7 @@ export default class OASNormalize {
         // still upconvert it to an OpenAPI definition file so our returned dataset is always one
         // of those for a Postman dataset.
         if (utils.isPostman(schema)) {
-          return postmanToOpenAPI(JSON.stringify(schema), null, { outputFormat: 'json' }).then(JSON.parse);
+          return OASNormalize.convertPostmanToOpenAPI(schema);
         }
 
         return schema;
@@ -164,7 +171,7 @@ export default class OASNormalize {
           return schema;
         }
 
-        return postmanToOpenAPI(JSON.stringify(schema), null, { outputFormat: 'json' }).then(JSON.parse);
+        return OASNormalize.convertPostmanToOpenAPI(schema);
       })
       .then(async schema => {
         if (!utils.isSwagger(schema) && !utils.isOpenAPI(schema)) {
