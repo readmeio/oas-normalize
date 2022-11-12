@@ -8580,7 +8580,7 @@ Contact Support:
   },
   "openapi": "3.0.0",
   "paths": Object {
-    "/pet": Object {
+    "/v2/pet": Object {
       "post": Object {
         "parameters": Array [
           Object {
@@ -8766,7 +8766,7 @@ Contact Support:
         ],
       },
     },
-    "/pet/findByStatus": Object {
+    "/v2/pet/findByStatus": Object {
       "get": Object {
         "description": "Multiple status values can be provided with comma separated strings",
         "parameters": Array [
@@ -8886,7 +8886,7 @@ Contact Support:
         ],
       },
     },
-    "/pet/findByTags": Object {
+    "/v2/pet/findByTags": Object {
       "get": Object {
         "description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
         "parameters": Array [
@@ -9006,7 +9006,7 @@ Contact Support:
         ],
       },
     },
-    "/pet/{petId}": Object {
+    "/v2/pet/{petId}": Object {
       "delete": Object {
         "parameters": Array [
           Object {
@@ -9283,7 +9283,7 @@ Contact Support:
         ],
       },
     },
-    "/pet/{petId}/uploadImage": Object {
+    "/v2/pet/{petId}/uploadImage": Object {
       "post": Object {
         "parameters": Array [
           Object {
@@ -9370,7 +9370,7 @@ Contact Support:
         ],
       },
     },
-    "/store/inventory": Object {
+    "/v2/store/inventory": Object {
       "get": Object {
         "description": "Returns a map of status codes to quantities",
         "parameters": Array [
@@ -9418,7 +9418,7 @@ Contact Support:
         ],
       },
     },
-    "/store/order": Object {
+    "/v2/store/order": Object {
       "post": Object {
         "parameters": Array [
           Object {
@@ -9508,7 +9508,7 @@ Contact Support:
         ],
       },
     },
-    "/store/order/{orderId}": Object {
+    "/v2/store/order/{orderId}": Object {
       "delete": Object {
         "description": "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
         "parameters": Array [
@@ -9662,7 +9662,7 @@ Contact Support:
         ],
       },
     },
-    "/user": Object {
+    "/v2/user": Object {
       "post": Object {
         "description": "This can only be done by the logged in user.",
         "parameters": Array [
@@ -9721,7 +9721,7 @@ Contact Support:
         ],
       },
     },
-    "/user/createWithArray": Object {
+    "/v2/user/createWithArray": Object {
       "post": Object {
         "parameters": Array [
           Object {
@@ -9791,7 +9791,7 @@ Contact Support:
         ],
       },
     },
-    "/user/createWithList": Object {
+    "/v2/user/createWithList": Object {
       "post": Object {
         "parameters": Array [
           Object {
@@ -9861,7 +9861,7 @@ Contact Support:
         ],
       },
     },
-    "/user/login": Object {
+    "/v2/user/login": Object {
       "get": Object {
         "parameters": Array [
           Object {
@@ -9949,7 +9949,7 @@ Contact Support:
         ],
       },
     },
-    "/user/logout": Object {
+    "/v2/user/logout": Object {
       "get": Object {
         "responses": Object {
           "500": Object {
@@ -9978,7 +9978,7 @@ Contact Support:
         ],
       },
     },
-    "/user/{username}": Object {
+    "/v2/user/{username}": Object {
       "delete": Object {
         "description": "This can only be done by the logged in user.",
         "parameters": Array [
@@ -10222,7 +10222,7 @@ Contact Support:
   },
   "servers": Array [
     Object {
-      "url": "http://{{baseurl}}",
+      "url": "http://petstore.swagger.io",
     },
   ],
   "tags": Array [

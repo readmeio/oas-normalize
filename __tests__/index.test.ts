@@ -167,7 +167,7 @@ describe('#deref', () => {
       const o = new OASNormalize(postman);
       const deref = (await o.deref()) as OpenAPIV3.Document;
 
-      expect(deref?.paths?.['/pet']?.post?.requestBody).toStrictEqual({
+      expect(deref?.paths?.['/v2/pet']?.post?.requestBody).toStrictEqual({
         content: {
           'application/json': {
             schema: {
