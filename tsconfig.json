@@ -9,6 +9,7 @@
     "paths": {
       "swagger2openapi": [".sink.d.ts"]
     },
+    "skipLibCheck": true
   },
   "include": ["./src/**/*"]
 }
