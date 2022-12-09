@@ -14,6 +14,16 @@ export function isBuffer(obj: any) {
 }
 
 /**
+ * Converts GitHub blob URLs to raw URLs
+ */
+export function normalizeUrl(url: string) {
+  if (url.startsWith('https://github.com/')) {
+    return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+  }
+  return url;
+}
+
+/**
  * Determine the type of a given variable. Returns `false` if unrecognized.
  *
  */

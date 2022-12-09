@@ -70,7 +70,7 @@ export default class OASNormalize {
         return resolve(this.file.toString());
 
       case 'url':
-        const resp = await fetch(this.file).then(res => res.text());
+        const resp = await fetch(utils.normalizeUrl(this.file)).then(res => res.text());
         return resolve(resp);
 
       case 'path':
