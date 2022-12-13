@@ -17,7 +17,7 @@ export function isBuffer(obj: any) {
  * Converts GitHub blob URLs to raw URLs
  */
 export function normalizeURL(url: string) {
-  if (url.startsWith('https://github.com/')) {
+  if (url.startsWith('https://github.com/') && url.includes('/blob/')) {
     return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
   }
   return url;
