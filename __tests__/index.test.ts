@@ -68,6 +68,16 @@ describe('#load', () => {
         await expect(o.load()).resolves.toStrictEqual(json);
         mock.done();
       });
+
+      it('should convert GitHub repo URLs to raw URLs', async () => {
+        const mock = nock('https://raw.githubusercontent.com')
+          .get('/readmeio/oas-examples/main/3.0/json/petstore.json')
+          .reply(200, json);
+        const o = new OASNormalize('https://github.com/readmeio/oas-examples/blob/main/3.0/json/petstore.json');
+
+        await expect(o.load()).resolves.toStrictEqual(json);
+        mock.done();
+      });
     });
 
     describe('paths', () => {
