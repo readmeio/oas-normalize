@@ -9,10 +9,10 @@
 </p>
 
 <p align="center">
-  <a href="https://npm.im/oas-normalize"><img src="https://img.shields.io/npm/v/oas-normalize.svg?style=for-the-badge" alt="NPM Version"></a>
-  <a href="https://npm.im/oas-normalize"><img src="https://img.shields.io/node/v/oas-normalize.svg?style=for-the-badge" alt="Node Version"></a>
-  <a href="https://npm.im/oas-normalize"><img src="https://img.shields.io/npm/l/oas-normalize.svg?style=for-the-badge" alt="MIT License"></a>
-  <a href="https://github.com/readmeio/oas-normalize"><img src="https://img.shields.io/github/workflow/status/readmeio/oas-normalize/CI.svg?style=for-the-badge" alt="Build status"></a>
+  <a href="https://npm.im/oas-normalize"><img src="https://img.shields.io/npm/v/oas-normalize?style=for-the-badge" alt="NPM Version"></a>
+  <a href="https://npm.im/oas-normalize"><img src="https://img.shields.io/node/v/oas-normalize?style=for-the-badge" alt="Node Version"></a>
+  <a href="https://npm.im/oas-normalize"><img src="https://img.shields.io/npm/l/oas-normalize?style=for-the-badge" alt="MIT License"></a>
+  <a href="https://github.com/readmeio/oas-normalize"><img src="https://img.shields.io/github/actions/workflow/status/readmeio/oas-normalize/ci.yml?branch=main&style=for-the-badge" alt="Build status"></a>
 </p>
 
 ## Installation
