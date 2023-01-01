@@ -46,7 +46,7 @@
     "js-yaml": "^4.1.0",
     "node-fetch": "^2.6.1",
     "openapi-types": "^12.0.0",
-    "postman-to-openapi": "^2.7.1",
+    "postman-to-openapi": "^3.0.0",
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {
