@@ -10,10 +10,10 @@ import converter from 'swagger2openapi';
 
 import * as utils from './lib/utils';
 
-export type Options = {
+export interface Options {
   colorizeErrors?: boolean;
   enablePaths?: boolean;
-};
+}
 
 export const isAPIDefinition = utils.isAPIDefinition;
 export const getAPIDefinitionType = utils.getAPIDefinitionType;
