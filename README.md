@@ -15,6 +15,10 @@
   <a href="https://github.com/readmeio/oas-normalize"><img src="https://img.shields.io/github/actions/workflow/status/readmeio/oas-normalize/ci.yml?branch=main&style=for-the-badge" alt="Build status"></a>
 </p>
 
+<p align="center">
+  <a href="https://readme.com"><img src="https://raw.githubusercontent.com/readmeio/.github/main/oss-badge.svg" /></a>
+</p>
+
 ## Installation
 
 ```bash
