@@ -248,6 +248,14 @@ describe('#validate', () => {
     await expect(o.validate()).rejects.toMatchSnapshot();
   });
 
+  it('should error out for empty file', async () => {
+    const o = new OASNormalize(require.resolve('./__fixtures__/invalid/empty.json'), {
+      enablePaths: true,
+    });
+
+    await expect(o.validate()).rejects.toStrictEqual(new Error('No file contents found.'));
+  });
+
   // Skipping because the `chalk` dependency of `better-ajv-errors` within `openapi-parser` has
   // issues in CI. Test works fine locally though!
   it.skip('should colorize errors when `opts.colorizeErrors` is present', async () => {
