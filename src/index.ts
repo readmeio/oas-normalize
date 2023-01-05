@@ -80,7 +80,7 @@ export default class OASNormalize {
         }
 
         const contents = fs.readFileSync(this.file).toString();
-        if (!contents) {
+        if (!contents.trim()) {
           return Promise.reject(new Error('No file contents found.'));
         }
         return resolve(contents);
