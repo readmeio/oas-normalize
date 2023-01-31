@@ -29,7 +29,7 @@ export default class OASNormalize {
 
   opts: Options;
 
-  type: boolean | string;
+  type: ReturnType<typeof utils.getType>;
 
   constructor(file: any, opts?: Options) {
     this.file = file;
