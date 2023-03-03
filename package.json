@@ -1,6 +1,6 @@
 {
   "name": "oas-normalize",
-  "version": "8.3.2",
+  "version": "8.3.3",
   "description": "Tooling for converting, valiating, and parsing OpenAPI, Swagger, and Postman API definitions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
