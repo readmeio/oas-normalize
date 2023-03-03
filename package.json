@@ -43,10 +43,10 @@
   "license": "MIT",
   "dependencies": {
     "@readme/openapi-parser": "^2.4.0",
+    "@readme/postman-to-openapi": "^4.0.0",
     "js-yaml": "^4.1.0",
     "node-fetch": "^2.6.1",
     "openapi-types": "^12.1.0",
-    "postman-to-openapi": "^3.0.1",
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {

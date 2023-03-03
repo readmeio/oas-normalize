@@ -3,8 +3,8 @@ import type { OpenAPI } from 'openapi-types';
 import fs from 'fs';
 
 import openapiParser from '@readme/openapi-parser';
+import postmanToOpenAPI from '@readme/postman-to-openapi';
 import fetch from 'node-fetch';
-import postmanToOpenAPI from 'postman-to-openapi';
 
 import converter from 'swagger2openapi';
 
