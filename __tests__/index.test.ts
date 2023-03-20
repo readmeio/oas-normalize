@@ -107,6 +107,16 @@ describe('#load', () => {
       );
     });
   });
+
+  describe('quirks', () => {
+    it('should not convert date strings in YAML files into Date objects', async () => {
+      const yaml = require.resolve('./__fixtures__/quirks/yaml-date.yaml');
+      const o = new OASNormalize(fs.readFileSync(yaml, 'utf8'));
+
+      const s = await o.load();
+      expect(typeof s.info.version).toBe('string');
+    });
+  });
 });
 
 describe('#bundle', () => {
