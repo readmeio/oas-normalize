@@ -1,5 +1,4 @@
-import YAML from 'js-yaml';
-
+import YAML, { JSON_SCHEMA } from 'js-yaml';
 /**
  * Determine if a given variable is a `Buffer`.
  *
@@ -90,7 +89,7 @@ export function stringToJSON(string: string | Record<string, unknown>) {
     return JSON.parse(string);
   }
 
-  return YAML.load(string);
+  return YAML.load(string, { schema: JSON_SCHEMA });
 }
 
 /**
