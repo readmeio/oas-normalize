@@ -8,6 +8,9 @@ updates:
       - erunion
     labels:
       - dependencies
+    commit-message:
+      prefix: chore(deps)
+      prefix-development: chore(deps-dev)
 
   - package-ecosystem: npm
     directory: "/"
@@ -18,3 +21,8 @@ updates:
       - erunion
     labels:
       - dependencies
+    ignore:
+      # node-fetch is now an ESM package and can't be used here without a rewrite.
+      - dependency-name: node-fetch
+        versions:
+          - ">= 3"
