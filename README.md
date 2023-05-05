@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  Tooling for converting, valiating, and parsing OpenAPI, Swagger, and Postman API definitions
+  Tooling for converting, validating, and parsing OpenAPI, Swagger, and Postman API definitions
 </p>
 
 <p align="center">
