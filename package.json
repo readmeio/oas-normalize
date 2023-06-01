@@ -52,7 +52,7 @@
   "devDependencies": {
     "@readme/eslint-config": "^10.5.2",
     "@readme/oas-examples": "^5.10.0",
-    "@types/jest": "^29.5.1",
+    "@types/jest": "^29.5.2",
     "@types/js-yaml": "^4.0.5",
     "@types/node-fetch": "^2.6.3",
     "eslint": "^8.39.0",
