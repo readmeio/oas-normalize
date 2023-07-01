@@ -50,7 +50,7 @@
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {
-    "@readme/eslint-config": "^10.5.3",
+    "@readme/eslint-config": "^10.6.1",
     "@readme/oas-examples": "^5.11.1",
     "@types/jest": "^29.5.2",
     "@types/js-yaml": "^4.0.5",
