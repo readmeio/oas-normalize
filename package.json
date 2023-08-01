@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@readme/eslint-config": "^10.6.1",
-    "@readme/oas-examples": "^5.11.1",
+    "@readme/oas-examples": "^5.12.0",
     "@types/jest": "^29.5.2",
     "@types/js-yaml": "^4.0.5",
     "@types/node-fetch": "^2.6.4",
