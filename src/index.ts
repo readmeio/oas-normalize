@@ -158,7 +158,7 @@ export default class OASNormalize {
        */
       convertToLatest?: boolean;
       parser?: openapiParser.Options;
-    } = { convertToLatest: false }
+    } = { convertToLatest: false },
   ) {
     const convertToLatest = opts.convertToLatest;
     const parserOptions = opts.parser || {};
@@ -230,7 +230,7 @@ export default class OASNormalize {
             // contents so we'll do our best to extract a version out of this schema URL that they
             // seem to usually match. If not we'll fallback to treating it as an `unknown` version.
             const match = schema.info.schema.match(
-              /http(s?):\/\/schema.getpostman.com\/json\/collection\/v([0-9.]+)\//
+              /http(s?):\/\/schema.getpostman.com\/json\/collection\/v([0-9.]+)\//,
             );
 
             if (match) {

@@ -1,6 +1,3 @@
 {
-  "extends": "@readme/eslint-config/testing",
-  "rules": {
-    "jsdoc/require-jsdoc": "off"
-  }
+  "extends": "@readme/eslint-config/testing/vitest"
 }

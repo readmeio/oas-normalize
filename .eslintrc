@@ -1,22 +1,13 @@
 {
   "extends": [
     "@readme/eslint-config",
-    "@readme/eslint-config/docs",
     "@readme/eslint-config/typescript"
   ],
-  "plugins": ["jsdoc"],
   "root": true,
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
 
     "camelcase": ["error", { "allow": ["OpenAPIV3_1"] }],
-
-    "jsdoc/require-jsdoc": "error",
-    "jsdoc/require-param": "off",
-    "jsdoc/require-param-type": "off",
-    "jsdoc/require-returns": "off",
-    "jsdoc/require-returns-type": "off",
-    "jsdoc/tag-lines": "off",
 
     "no-case-declarations": "off"
   }

@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 
 import nock from 'nock';
+import { describe, beforeAll, beforeEach, it, expect } from 'vitest';
 
 import OASNormalize, { getAPIDefinitionType, isAPIDefinition } from '../src';
 import { isOpenAPI, isPostman, isSwagger } from '../src/lib/utils';
@@ -103,7 +104,7 @@ describe('#load', () => {
             // eslint-disable-next-line camelcase
             _postman_id: '0b2e8577-2899-4229-bb1c-4cb031108c2f',
           }),
-        })
+        }),
       );
     });
   });
@@ -246,7 +247,7 @@ describe('#validate', () => {
       expect.objectContaining({
         message: expect.stringContaining("REQUIRED must have required property 'name'"),
         details: expect.any(Array),
-      })
+      }),
     );
   });
 
@@ -332,14 +333,14 @@ describe('#validate', () => {
 describe('#version', () => {
   it('should detect an OpenAPI definition', async () => {
     await expect(
-      new OASNormalize(require.resolve('@readme/oas-examples/3.0/json/petstore.json'), { enablePaths: true }).version()
+      new OASNormalize(require.resolve('@readme/oas-examples/3.0/json/petstore.json'), { enablePaths: true }).version(),
     ).resolves.toStrictEqual({
       specification: 'openapi',
       version: '3.0.0',
     });
 
     await expect(
-      new OASNormalize(require.resolve('@readme/oas-examples/3.1/json/petstore.json'), { enablePaths: true }).version()
+      new OASNormalize(require.resolve('@readme/oas-examples/3.1/json/petstore.json'), { enablePaths: true }).version(),
     ).resolves.toStrictEqual({
       specification: 'openapi',
       version: '3.1.0',
@@ -350,7 +351,7 @@ describe('#version', () => {
     await expect(
       new OASNormalize(require.resolve('./__fixtures__/postman/petstore.collection.json'), {
         enablePaths: true,
-      }).version()
+      }).version(),
     ).resolves.toStrictEqual({
       specification: 'postman',
       version: '2.1.0',
@@ -359,7 +360,7 @@ describe('#version', () => {
 
   it('should detect a Swagger definition', async () => {
     await expect(
-      new OASNormalize(require.resolve('@readme/oas-examples/2.0/json/petstore.json'), { enablePaths: true }).version()
+      new OASNormalize(require.resolve('@readme/oas-examples/2.0/json/petstore.json'), { enablePaths: true }).version(),
     ).resolves.toStrictEqual({
       specification: 'swagger',
       version: '2.0',
