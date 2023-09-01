@@ -2,7 +2,21 @@
   "name": "oas-normalize",
   "version": "8.4.1",
   "description": "Tooling for converting, validating, and parsing OpenAPI, Swagger, and Postman API definitions",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./lib/utils": {
+      "types": "./dist/lib/utils.d.ts",
+      "require": "./dist/lib/utils.js",
+      "import": "./dist/lib/utils.mjs"
+    },
+    "./package.json": "./package.json"
+  },
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "engines": {
     "node": ">=14"
@@ -31,7 +45,7 @@
     "url": "https://github.com/readmeio/oas-normalize/issues"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
     "lint": "eslint . --ext .js,.ts && npm run prettier",
     "prebuild": "rm -rf dist/",
     "prepack": "npm run build",
@@ -58,6 +72,7 @@
     "eslint": "^8.46.0",
     "nock": "^13.3.2",
     "prettier": "^3.0.1",
+    "tsup": "^7.2.0",
     "typescript": "^5.1.6",
     "vitest": "^0.34.1"
   },
