@@ -25,6 +25,12 @@ updates:
       - erunion
     labels:
       - dependencies
+    groups:
+      minor-development-deps:
+        dependency-type: 'development'
+        update-types:
+          - minor
+          - patch
     ignore:
       # node-fetch is now an ESM package and can't be used here without a rewrite.
       - dependency-name: node-fetch
