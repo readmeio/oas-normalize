@@ -21,6 +21,9 @@
   "engines": {
     "node": ">=14"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "api",
     "apidoc",
