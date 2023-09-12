@@ -1,10 +1,9 @@
 import type { OpenAPI } from 'openapi-types';
 
-import fs from 'fs';
+import fs from 'node:fs';
 
 import openapiParser from '@readme/openapi-parser';
 import postmanToOpenAPI from '@readme/postman-to-openapi';
-import fetch from 'node-fetch';
 
 import converter from 'swagger2openapi';
 

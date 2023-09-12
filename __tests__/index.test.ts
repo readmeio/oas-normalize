@@ -1,10 +1,10 @@
 import type { OpenAPIV3 } from 'openapi-types';
 
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
-import nock from 'nock';
-import { describe, beforeAll, beforeEach, it, expect } from 'vitest';
+import fetchMock from 'fetch-mock';
+import { describe, afterEach, beforeAll, beforeEach, it, expect } from 'vitest';
 
 import OASNormalize, { getAPIDefinitionType, isAPIDefinition } from '../src';
 import { isOpenAPI, isPostman, isSwagger } from '../src/lib/utils';
@@ -54,30 +54,29 @@ describe('#load', () => {
     });
 
     describe('urls', () => {
+      afterEach(() => {
+        fetchMock.restore();
+      });
+
       it('should support URLs', async () => {
-        const mock = nock('http://example.com').get(`/api-${version}.json`).reply(200, json);
+        fetchMock.get(`http://example.com/api-${version}.json`, json);
         const o = new OASNormalize(`http://example.com/api-${version}.json`);
 
         await expect(o.load()).resolves.toStrictEqual(json);
-        mock.done();
       });
 
       it('should support HTTPS URLs', async () => {
-        const mock = nock('https://example.com').get(`/api-${version}.json`).reply(200, json);
+        fetchMock.get(`https://example.com/api-${version}.json`, json);
         const o = new OASNormalize(`https://example.com/api-${version}.json`);
 
         await expect(o.load()).resolves.toStrictEqual(json);
-        mock.done();
       });
 
       it('should convert GitHub repo URLs to raw URLs', async () => {
-        const mock = nock('https://raw.githubusercontent.com')
-          .get('/readmeio/oas-examples/main/3.0/json/petstore.json')
-          .reply(200, json);
+        fetchMock.get('https://raw.githubusercontent.com/readmeio/oas-examples/main/3.0/json/petstore.json', json);
         const o = new OASNormalize('https://github.com/readmeio/oas-examples/blob/main/3.0/json/petstore.json');
 
         await expect(o.load()).resolves.toStrictEqual(json);
-        mock.done();
       });
     });
 
@@ -284,14 +283,17 @@ describe('#validate', () => {
     ['OpenAPI 3.0', '3.0'],
     ['OpenAPI 3.1', '3.1'],
   ])('%s support', (_, version) => {
+    afterEach(() => {
+      fetchMock.restore();
+    });
+
     it('should validate a URL hosting JSON as expected', async () => {
       const json = await import(`@readme/oas-examples/${version}/json/petstore.json`).then(r => r.default);
 
-      const mock = nock('http://example.com').get(`/api-${version}.json`).reply(200, cloneObject(json));
+      fetchMock.get(`http://example.com/api-${version}.json`, cloneObject(json));
       const o = new OASNormalize(`http://example.com/api-${version}.json`);
 
       await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
-      mock.done();
     });
 
     it('should validate a JSON path as expected', async () => {
@@ -304,11 +306,10 @@ describe('#validate', () => {
 
     it('should validate a URL hosting YAML as expected', async () => {
       const yaml = fs.readFileSync(require.resolve(`@readme/oas-examples/${version}/yaml/petstore.yaml`), 'utf8');
-      const mock = nock('http://example.com').get(`/api-${version}.yaml`).reply(200, yaml);
+      fetchMock.get(`http://example.com/api-${version}.yaml`, yaml);
       const o = new OASNormalize(`http://example.com/api-${version}.yaml`);
 
       await expect(o.validate({ convertToLatest: true })).resolves.toMatchSnapshot();
-      mock.done();
     });
 
     it('should validate a YAML path as expected', async () => {
