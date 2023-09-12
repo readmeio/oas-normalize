@@ -4,8 +4,8 @@
     "baseUrl": "./src",
     "declaration": true,
     "esModuleInterop": true,
-    "lib": ["dom", "es2020"],
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "outDir": "dist/",
     "paths": {
       "swagger2openapi": [".sink.d.ts"]
