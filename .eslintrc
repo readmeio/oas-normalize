@@ -9,6 +9,8 @@
 
     "camelcase": ["error", { "allow": ["OpenAPIV3_1"] }],
 
-    "no-case-declarations": "off"
+    "no-case-declarations": "off",
+
+    "unicorn/prefer-node-protocol": "error"
   }
 }
