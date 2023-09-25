@@ -8,14 +8,7 @@ import postmanToOpenAPI from '@readme/postman-to-openapi';
 import converter from 'swagger2openapi';
 
 import * as utils from './lib/utils';
-
-export interface Options {
-  colorizeErrors?: boolean;
-  enablePaths?: boolean;
-}
-
-export const isAPIDefinition = utils.isAPIDefinition;
-export const getAPIDefinitionType = utils.getAPIDefinitionType;
+import { Options } from './lib/types';
 
 export default class OASNormalize {
   cache: {
@@ -215,7 +208,7 @@ export default class OASNormalize {
    */
   version() {
     return this.load().then(schema => {
-      switch (getAPIDefinitionType(schema)) {
+      switch (utils.getAPIDefinitionType(schema)) {
         case 'openapi':
           return {
             specification: 'openapi',

@@ -9,12 +9,11 @@ export default defineConfig((options: Options) => ({
   cjsInterop: true,
   clean: true,
   dts: true,
-  entry: ['src/lib/utils.ts', 'src/index.ts'],
+  entry: ['src/index.ts', 'src/lib/types.ts', 'src/lib/utils.ts'],
   format: ['esm', 'cjs'],
   minify: false,
   shims: true,
   silent: !options.watch,
   sourcemap: true,
   splitting: true,
-  treeshake: true,
 }));
