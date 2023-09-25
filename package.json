@@ -8,6 +8,10 @@
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
     },
+    "./lib/types": {
+      "require": "./dist/lib/types.cjs",
+      "import": "./dist/lib/types.js"
+    },
     "./lib/utils": {
       "require": "./dist/lib/utils.cjs",
       "import": "./dist/lib/utils.js"
