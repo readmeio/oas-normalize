@@ -6,8 +6,8 @@ import path from 'node:path';
 import fetchMock from 'fetch-mock';
 import { describe, afterEach, beforeAll, beforeEach, it, expect } from 'vitest';
 
-import OASNormalize, { getAPIDefinitionType, isAPIDefinition } from '../src';
-import { isOpenAPI, isPostman, isSwagger } from '../src/lib/utils';
+import OASNormalize from '../src';
+import { getAPIDefinitionType, isAPIDefinition, isOpenAPI, isPostman, isSwagger } from '../src/lib/utils';
 
 function cloneObject(obj) {
   return JSON.parse(JSON.stringify(obj));

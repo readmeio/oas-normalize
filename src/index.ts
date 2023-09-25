@@ -1,3 +1,4 @@
+import type { Options } from './lib/types';
 import type { OpenAPI } from 'openapi-types';
 
 import fs from 'node:fs';
@@ -8,7 +9,6 @@ import postmanToOpenAPI from '@readme/postman-to-openapi';
 import converter from 'swagger2openapi';
 
 import * as utils from './lib/utils';
-import { Options } from './lib/types';
 
 export default class OASNormalize {
   cache: {
