@@ -1,6 +1,6 @@
 > **Warning**
 >
-> `oas-normalize` has moved! The source for this library now lives at https://github.com/readmeio/oas-normalize.
+> `oas-normalize` has moved! The source for this library now lives at https://github.com/readmeio/oas.
  
 <p align="center">
   <a href="https://npm.im/oas-normalize">
